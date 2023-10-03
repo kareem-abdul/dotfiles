@@ -16,6 +16,15 @@ function isInstalled() {
     return 0;
 }
 
+# scripts
+if ! isInstalled "scripts"; then
+    echo "setting up scripts"
+    for script in $(pwd)/.local/bin/*; do
+        echo "linking $script"
+        ln -s $script ~/.local/bin/$(basename $script)
+    done
+    echo "scripts" >> installed
+fi
 
 # tmux
 if ! isInstalled "tmux"; then
@@ -27,6 +36,7 @@ if ! isInstalled "tmux"; then
     echo "tmux" >> installed
 fi
 
+# nvim
 if ! isInstalled "nvim"; then 
     echo "setting up nvim config"
     if [[ -d "$HOME/.config/.nvim" ]]; then
