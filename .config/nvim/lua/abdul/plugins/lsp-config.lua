@@ -24,6 +24,9 @@ return {
         local capabilities = require('cmp_nvim_lsp').default_capabilities();
         require("mason-lspconfig").setup_handlers({
             function(server_name)
+                if server_name == 'jdtls' then
+                    return
+                end
                 local server_setup = utils.load("abdul.plugins.lsp." .. server_name);
                 if server_setup then
                     server_setup.setup(capabilities, on_attach);

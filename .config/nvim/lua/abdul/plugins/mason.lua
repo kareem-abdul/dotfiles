@@ -20,6 +20,7 @@ return    {
                 "jsonls",
                 "tsserver",
                 "lua_ls",
+                "jdtls", -- eclipse java lsp
                 "marksman", -- markdown lsp 
                 "spectral", -- openapi lsp server
             },
