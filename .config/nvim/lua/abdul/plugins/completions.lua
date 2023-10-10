@@ -14,9 +14,9 @@ return {
         local cmp = require('cmp');
         local luasnip = require('luasnip');
        cmp.setup({
-           -- experimental = {
-           --     ghost_text = true,
-           -- },
+           experimental = {
+               ghost_text = true,
+           },
            snippet = {
                 expand = function(args)
                     luasnip.lsp_expand(args.body)
@@ -27,11 +27,11 @@ return {
                 completeopt = 'menu,menuone,preview',
             },
             sources = cmp.config.sources({
-                { name = 'nvim_lua' },
                 { name = 'nvim_lsp' },
+                { name = 'nvim_lua' },
 
-                { name = 'path' },
                 { name = 'luasnip' },
+                { name = 'path' },
                 { name = 'buffer' },
             }),
 

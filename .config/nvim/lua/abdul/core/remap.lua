@@ -42,12 +42,18 @@ function M.harpoon_keymaps()
     vim.keymap.set("n", "<leader>a", mark.add_file)
     vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
     vim.keymap.set("n", "<leader>cm", cmd.toggle_quick_menu)
-    vim.keymap.set("n", "<C-s>", ui.nav_next)
-    vim.keymap.set("n", "<C-S>", ui.nav_prev)
+    vim.keymap.set("n", "<C-n>", ui.nav_next)
+    vim.keymap.set("n", "<C-p>", ui.nav_prev)
+    vim.keymap.set("n", "<leader>1", function () ui.nav_file(1) end);
+    vim.keymap.set("n", "<leader>2", function () ui.nav_file(2) end);
+    vim.keymap.set("n", "<leader>3", function () ui.nav_file(3) end);
+    vim.keymap.set("n", "<leader>4", function () ui.nav_file(4) end);
 end
 
 function M.telescope_keymaps()
     local builtin = require("telescope.builtin");
+    local actions = require("telescope.actions");
+
     vim.keymap.set('n', '<leader>pf', builtin.find_files, {});
     vim.keymap.set('n', '<C-p>', builtin.git_files, {})
     vim.keymap.set('n', '<leader>ps', function() vim.ui.input({ prompt = "GREP >" } , function(arg) builtin.grep_string({ search = arg }) end) end)
@@ -57,6 +63,19 @@ function M.telescope_keymaps()
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({ winblend = 10, previewer = false }))
     end)
     vim.keymap.set('n', '<leader>sr', builtin.resume)
+    return {
+        i = {
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+            ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+            ["<C-p>"] = false,
+            ["<C-n>"] = false,
+        },
+        n = {
+            ["<C-p>"] = false,
+            ["<C-n>"] = false,
+        }
+    };
 end
 
 function M.nvim_cmp_completions()
@@ -95,6 +114,8 @@ function M.lsp_config_keymaps(bufnr)
     vim.keymap.set("n", "gD", function() builtin.diagnostics({ bufnr = 0 }) end, opts)
 
     vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
+
+    vim.keymap.set("n", "<leader>=", function () vim.lsp.buf.format({ async = true }) end, opts)
 end
 
 function M.eslint_lsp_keymaps(buffnr)
