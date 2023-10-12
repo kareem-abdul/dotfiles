@@ -26,14 +26,20 @@ function M.load_global()
     vim.keymap.set("n", "<leader>Y", "\"+Y")
 
     -- auto close paranthesis, braces, brackets, quotes etc.
-    vim.keymap.set("i", '"' ,'""<left>');
+    vim.keymap.set("i", '"', '""<left>');
     vim.keymap.set("i", "'", "''<left>");
     vim.keymap.set("i", "(", "()<left>");
     vim.keymap.set("i", "[", "[]<left>");
     vim.keymap.set("i", "{", "{}<left>");
     vim.keymap.set("i", "{<CR>", "{<CR>}<ESC>O");
-end
 
+    vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'qf',
+        callback = function()
+            vim.keymap.set('n', '<leader>qd', require('abdul.core.utils').removeQfLine)
+        end
+    })
+end
 
 function M.harpoon_keymaps()
     local mark = require("harpoon.mark")
@@ -44,10 +50,10 @@ function M.harpoon_keymaps()
     vim.keymap.set("n", "<leader>cm", cmd.toggle_quick_menu)
     vim.keymap.set("n", "<C-n>", ui.nav_next)
     vim.keymap.set("n", "<C-p>", ui.nav_prev)
-    vim.keymap.set("n", "<leader>1", function () ui.nav_file(1) end);
-    vim.keymap.set("n", "<leader>2", function () ui.nav_file(2) end);
-    vim.keymap.set("n", "<leader>3", function () ui.nav_file(3) end);
-    vim.keymap.set("n", "<leader>4", function () ui.nav_file(4) end);
+    vim.keymap.set("n", "<leader>1", function() ui.nav_file(1) end);
+    vim.keymap.set("n", "<leader>2", function() ui.nav_file(2) end);
+    vim.keymap.set("n", "<leader>3", function() ui.nav_file(3) end);
+    vim.keymap.set("n", "<leader>4", function() ui.nav_file(4) end);
 end
 
 function M.telescope_keymaps()
@@ -55,8 +61,8 @@ function M.telescope_keymaps()
     local actions = require("telescope.actions");
 
     vim.keymap.set('n', '<leader>pf', builtin.find_files, {});
-    vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-    vim.keymap.set('n', '<leader>ps', function() vim.ui.input({ prompt = "GREP >" } , function(arg) builtin.grep_string({ search = arg }) end) end)
+    vim.keymap.set('n', '<leader>ps',
+        function() vim.ui.input({ prompt = "GREP >" }, function(arg) builtin.grep_string({ search = arg }) end) end)
     vim.keymap.set('n', '<leader>lg', builtin.live_grep)
     vim.keymap.set('n', '<leader>gf', function() builtin.git_files({ show_untracked = true }) end)
     vim.keymap.set('n', '<leader>/', function()
@@ -68,12 +74,9 @@ function M.telescope_keymaps()
             ["<C-j>"] = actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous,
             ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
-            ["<C-p>"] = false,
-            ["<C-n>"] = false,
-        },
-        n = {
-            ["<C-p>"] = false,
-            ["<C-n>"] = false,
+            ["<C-a>"] = actions.select_all,
+            ["<C-p>"] = actions.preview_scrolling_up,
+            ["<C-n>"] = actions.preview_scrolling_down,
         }
     };
 end
@@ -93,7 +96,7 @@ end
 
 function M.lsp_config_keymaps(bufnr)
     local builtin = require("telescope.builtin");
-    local opts = {buffer = bufnr, noremap = true, silent = false };
+    local opts = { buffer = bufnr, noremap = true, silent = false };
 
     vim.keymap.set("n", "<leader>gd", function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "<leader>gr", function() vim.lsp.buf.references() end, opts)
@@ -115,7 +118,7 @@ function M.lsp_config_keymaps(bufnr)
 
     vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
 
-    vim.keymap.set("n", "<leader>=", function () vim.lsp.buf.format({ async = true }) end, opts)
+    vim.keymap.set("n", "<leader>=", function() vim.lsp.buf.format({ async = true }) end, opts)
 end
 
 function M.eslint_lsp_keymaps(buffnr)
