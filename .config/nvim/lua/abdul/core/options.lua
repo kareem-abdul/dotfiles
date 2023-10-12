@@ -11,7 +11,7 @@ opt.expandtab = true
 opt.swapfile = false
 opt.backup = false
 
-opt.hlsearch = true 
+opt.hlsearch = true
 opt.incsearch = true
 
 opt.termguicolors = true
@@ -21,4 +21,4 @@ opt.signcolumn = "yes"
 
 opt.scrolloff = 8
 opt.updatetime = 50
-
+opt.wrap = false
