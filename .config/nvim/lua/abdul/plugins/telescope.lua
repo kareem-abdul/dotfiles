@@ -11,7 +11,15 @@ return {
         local mappings = require("abdul.core.remap").telescope_keymaps();
         require("telescope").setup({
             defaults = {
-                mappings = mappings
+                mappings = mappings,
+                path_diplay = { shorten = 3 },
+                sorting_strategy = "ascending",
+                layout_config = {
+                    -- height = 0.99,
+                    width = 0.95,
+                    prompt_position = 'top',
+                    preview_width = 0.45,
+                }
             }
         })
         require('telescope').load_extension('fzf')
