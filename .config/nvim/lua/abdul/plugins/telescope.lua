@@ -15,10 +15,11 @@ return {
                 path_diplay = { shorten = 3 },
                 sorting_strategy = "ascending",
                 layout_config = {
-                    -- height = 0.99,
-                    width = 0.95,
-                    prompt_position = 'top',
-                    preview_width = 0.45,
+                    horizontal = {
+                        width = 0.95,
+                        prompt_position = 'top',
+                        preview_width = 0.45,
+                    }
                 }
             }
         })

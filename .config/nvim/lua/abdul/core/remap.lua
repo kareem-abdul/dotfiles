@@ -61,8 +61,15 @@ function M.telescope_keymaps()
     local actions = require("telescope.actions");
 
     vim.keymap.set('n', '<leader>pf', builtin.find_files, {});
-    vim.keymap.set('n', '<leader>ps',
-        function() vim.ui.input({ prompt = "GREP >" }, function(arg) builtin.grep_string({ search = arg }) end) end)
+    vim.keymap.set('n', '<leader>ps', function()
+        vim.ui.input({ prompt = "GREP >" },
+            function(arg)
+                if not arg or arg == "" then
+                    return
+                end
+                builtin.grep_string({ search = arg })
+            end)
+    end)
     vim.keymap.set('n', '<leader>lg', builtin.live_grep)
     vim.keymap.set('n', '<leader>gf', function() builtin.git_files({ show_untracked = true }) end)
     vim.keymap.set('n', '<leader>/', function()

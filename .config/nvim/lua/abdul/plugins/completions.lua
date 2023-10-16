@@ -10,7 +10,7 @@ return {
         "L3MON4D3/LuaSnip",
         'saadparwaiz1/cmp_luasnip',
     },
-    config = function(args)
+    config = function()
         local cmp = require('cmp');
         local luasnip = require('luasnip');
        cmp.setup({
@@ -24,15 +24,15 @@ return {
             },
             mapping = cmp.mapping.preset.insert(require('abdul.core.remap').nvim_cmp_completions()),
             completion = {
-                completeopt = 'menu,menuone,preview',
+                completeopt = 'menu,menuone,preview,noinsert',
             },
             sources = cmp.config.sources({
-                { name = 'nvim_lsp' },
-                { name = 'nvim_lua' },
+                { name = 'nvim_lsp', priority = 1000 },
+                { name = 'luasnip', priority = 750 },
 
-                { name = 'luasnip' },
-                { name = 'path' },
-                { name = 'buffer' },
+                { name = 'nvim_lua', priority = 500 },
+                { name = 'path', priority = 250 },
+                { name = 'buffer', priority = 150 },
             }),
 
         });
