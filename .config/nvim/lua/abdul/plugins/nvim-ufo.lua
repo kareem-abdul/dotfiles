@@ -1,9 +1,7 @@
 -- adds code folding
 return {
     "kevinhwang91/nvim-ufo",
-    dependecies = {
-        'kevinhwang91/promise-async'
-    },
+    dependencies = { 'kevinhwang91/promise-async' },
     event = { "BufReadPre", "BufNewFile" },
     config = function()
         vim.o.foldcolumn = '1' -- '0' is not bad
