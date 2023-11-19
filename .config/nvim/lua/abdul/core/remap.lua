@@ -128,6 +128,41 @@ function M.lsp_config_keymaps(bufnr)
     vim.keymap.set("n", "<leader>=", function() vim.lsp.buf.format({ async = true }) end, opts)
 end
 
+function M.gitsigns_keymaps(bufnr)
+    local gs = require("gitsigns")
+    local opts = { buffer = bufnr, noremap = true, silent = true };
+
+    -- Navigation
+    vim.keymap.set('n', ']c', function()
+        if vim.wo.diff then return ']c' end
+        vim.schedule(function() gs.next_hunk() end)
+        return '<Ignore>'
+    end, { expr = true })
+
+    vim.keymap.set('n', '[c', function()
+        if vim.wo.diff then return '[c' end
+        vim.schedule(function() gs.prev_hunk() end)
+        return '<Ignore>'
+    end, { expr = true })
+
+    -- Actions
+    vim.keymap.set('n', '<leader>hs', gs.stage_hunk, opts)
+    vim.keymap.set('n', '<leader>hr', gs.reset_hunk, opts)
+    -- vim.keymap.set('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end, opts)
+    -- vim.keymap.set('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end, opts)
+    -- vim.keymap.set('n', '<leader>hS', gs.stage_buffer, opts)
+    -- vim.keymap.set('n', '<leader>hu', gs.undo_stage_hunk, opts)
+    -- vim.keymap.set('n', '<leader>hR', gs.reset_buffer, opts)
+    vim.keymap.set('n', '<leader>hp', gs.preview_hunk, opts)
+    vim.keymap.set('n', '<leader>hb', function() gs.blame_line { full = true } end, opts)
+    vim.keymap.set('n', '<leader>hd', gs.diffthis, opts)
+    vim.keymap.set('n', '<leader>hD', function() gs.diffthis('~') end, opts)
+    -- vim.keymap.set('n', '<leader>td', gs.toggle_deleted, opts)
+
+    -- Text object
+    vim.keymap.set({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', opts)
+end
+
 function M.eslint_lsp_keymaps(buffnr)
     vim.keymap.set("n", "<leader>=", ":EslintFixAll<CR>", { buffer = buffnr, noremap = true, silent = true })
 end
