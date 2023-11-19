@@ -4,7 +4,7 @@ return {
     event = { "BufReadPost", "BufNewFile" }, -- https://tech.saigonist.com/b/code/list-all-vim-script-events.html
     config = function()
         require("nvim-treesitter.configs").setup({
-            ensure_installed = { "dockerfile", "javascript", "typescript", "java", "c", "lua", "vim", "vimdoc", "query" },
+            ensure_installed = { "dockerfile", "javascript", "typescript", "java", "c", "lua", "vim", "vimdoc", "query", "html" },
             sync_install = false,
 
             -- Automatically install missing parsers when entering buffer
