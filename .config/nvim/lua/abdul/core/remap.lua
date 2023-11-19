@@ -33,6 +33,10 @@ function M.load_global()
     vim.keymap.set("i", "{", "{}<left>");
     vim.keymap.set("i", "{<CR>", "{<CR>}<ESC>O");
 
+    -- resize panes
+    vim.keymap.set("n", "<C-w>>", ":vert res +20<CR>");
+    vim.keymap.set("n", "<C-w><", ":vert res -20<CR>");
+
     vim.api.nvim_create_autocmd('FileType', {
         pattern = 'qf',
         callback = function()
@@ -54,6 +58,11 @@ function M.harpoon_keymaps()
     vim.keymap.set("n", "<leader>2", function() ui.nav_file(2) end);
     vim.keymap.set("n", "<leader>3", function() ui.nav_file(3) end);
     vim.keymap.set("n", "<leader>4", function() ui.nav_file(4) end);
+    vim.keymap.set("n", "<leader>5", function() ui.nav_file(5) end);
+    vim.keymap.set("n", "<leader>6", function() ui.nav_file(6) end);
+    vim.keymap.set("n", "<leader>7", function() ui.nav_file(7) end);
+    vim.keymap.set("n", "<leader>8", function() ui.nav_file(8) end);
+    vim.keymap.set("n", "<leader>9", function() ui.nav_file(9) end);
 end
 
 function M.telescope_keymaps()
@@ -71,7 +80,7 @@ function M.telescope_keymaps()
             end)
     end)
     vim.keymap.set('n', '<leader>lg', builtin.live_grep)
-    vim.keymap.set('n', '<leader>gf', function() builtin.git_files({ show_untracked = true }) end)
+    vim.keymap.set('n', '<leader>gf', function() builtin.git_files({ show_untracked = true, use_git_root = false }) end)
     vim.keymap.set('n', '<leader>/', function()
         builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({ winblend = 10, previewer = false }))
     end)
@@ -97,7 +106,7 @@ function M.nvim_cmp_completions()
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),
     };
 end
 
@@ -168,3 +177,4 @@ function M.eslint_lsp_keymaps(buffnr)
 end
 
 return M;
+
