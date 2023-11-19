@@ -125,6 +125,9 @@ function M.lsp_config_keymaps(bufnr)
     vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+    vim.keymap.set("n", "<C-h>", function() vim.lsp.inlay_hint(bufnr, nil) end, opts)
+
+    vim.lsp.inlay_hint(bufnr, true);
 
     vim.keymap.set("n", "gd", function() builtin.lsp_definitions() end, opts)
     vim.keymap.set("n", "gr", function() builtin.lsp_references({ fname_width = 100 }) end, opts)
