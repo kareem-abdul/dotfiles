@@ -11,6 +11,17 @@ return {
         local mappings = require("abdul.core.remap").telescope_keymaps();
         require("telescope").setup({
             defaults = {
+                vimgrep_arguments = {
+                    'rg',
+                    '--color=never',
+                    '--no-heading',
+                    '--with-filename',
+                    '--line-number',
+                    '--column',
+                    '--smart-case',
+                    '--hidden',
+                },
+                file_ignore_patterns = { ".git", "node_modules" },
                 mappings = mappings,
                 path_diplay = { shorten = 3 },
                 sorting_strategy = "ascending",
