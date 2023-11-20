@@ -24,9 +24,9 @@ function M.setup()
     local jdtls_path = vim.fn.stdpath('data') .. '/mason/packages/jdtls'
     local jdtls_config_path = jdtls_path .. get_jdtls_config()[system]
     local jdtls_plugins_path = jdtls_path .. '/plugins'
-    local project_markers = { '.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle'}
+    local project_markers = { '.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle' }
 
-    local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t") -- see :h filename-modifiers 
+    local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t") -- see :h filename-modifiers
     local workspace_dir = vim.fn.stdpath('data') .. '/java/workspace-root/' .. project_name
     local jar_dir = vim.fn.glob(jdtls_plugins_path .. '/org.eclipse.equinox.launcher_*.jar')
 
@@ -34,8 +34,8 @@ function M.setup()
         capabilities = capabilities,
         on_attach = on_attach,
         flags = {
-           allow_incremental_sync = true,
-           debounce_text_changes = 80,
+            allow_incremental_sync = true,
+            debounce_text_changes = 80,
         },
         cmd = {
             'java', -- path to java 17, or java command if java is the default one configured
@@ -44,7 +44,7 @@ function M.setup()
             '-Declipse.product=org.eclipse.jdt.ls.core.product',
             '-Dlog.protocol=true',
             '-Dlog.level=ALL',
-            '-javaagent:'.. jdtls_path .. '/lombok.jar',
+            '-javaagent:' .. jdtls_path .. '/lombok.jar',
             '-Xmx1g', -- max heap size JVM can allocate (use Xms  to set minimun heap size)
             '--add-modules=ALL-SYSTEM',
             '--add-opens', 'java.base/java.util=ALL-UNNAMED',
@@ -96,6 +96,7 @@ function M.setup()
                     includeDecompiledSources = true,
                 },
                 saveAction = { organizeImports = false },
+                inlayHints = { parameterNames = { enabled = true } },
                 signatureHelp = { enabled = true },
                 sources = {
                     organizeImports = {
