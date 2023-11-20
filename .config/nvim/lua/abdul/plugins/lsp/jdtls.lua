@@ -11,7 +11,12 @@ local function get_jdtls_config()
 end
 
 function M.setup()
-    local on_attach = function(client, bufnr) require("abdul.core.remap").lsp_config_keymaps(bufnr) end;
+    local on_attach = function(client, bufnr)
+        require('jdtls').setup_dap({ hotcodereplace = 'auto' })
+        require("jdtls.dap").setup_dap_main_class_configs();
+        require("abdul.core.remap").lsp_config_keymaps(bufnr)
+        vim.lsp.codelens.refresh()
+    end;
     local capabilities = require('cmp_nvim_lsp').default_capabilities();
     local jdtls = utils.load("jdtls")
     if not jdtls then
@@ -29,6 +34,15 @@ function M.setup()
     local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t") -- see :h filename-modifiers
     local workspace_dir = vim.fn.stdpath('data') .. '/java/workspace-root/' .. project_name
     local jar_dir = vim.fn.glob(jdtls_plugins_path .. '/org.eclipse.equinox.launcher_*.jar')
+    local dap_path = vim.fn.stdpath('data') .. '/mason/packages/java-debug-adapter'
+    -- /home/kareem/.local/share/nvim/mason/packages/java-test/extension/server
+    local java_test = vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/java-test/extension/server/*.jar', 1);
+
+    local bundles = {
+        vim.fn.glob(dap_path .. '/extension/server/com.microsoft.java.debug.plugin-*.jar', 1)
+    };
+    vim.list_extend(bundles, vim.split(java_test, "\n"))
+
 
     local config = {
         capabilities = capabilities,
@@ -55,6 +69,9 @@ function M.setup()
             '-data', workspace_dir,
         },
         root_dir = require('jdtls.setup').find_root(project_markers),
+        init_options = {
+            bundles = bundles
+        },
 
         -- Here you can configure eclipse.jdt.ls specific settings
         -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
