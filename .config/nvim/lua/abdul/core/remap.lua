@@ -143,7 +143,7 @@ function M.lsp_config_keymaps(bufnr)
     -- debugger keymaps
     local dap = require("dap");
     local dap_widgets = require("dap.ui.widgets");
-    vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint { desc = "Set breakpoint" })
+    vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, { desc = "Set breakpoint" })
     vim.keymap.set("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", { desc = "Set conditional breakpoint" })
     vim.keymap.set("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", { desc = "Set log point" })
     vim.keymap.set("n", '<leader>br', dap.clear_breakpoints, { desc = "Clear breakpoints" })
