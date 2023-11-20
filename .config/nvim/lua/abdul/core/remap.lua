@@ -138,6 +138,29 @@ function M.lsp_config_keymaps(bufnr)
     vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
 
     vim.keymap.set("n", "<leader>=", function() vim.lsp.buf.format({ async = true }) end, opts)
+
+
+    -- debugger keymaps
+    local dap = require("dap");
+    local dap_widgets = require("dap.ui.widgets");
+    vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint { desc = "Set breakpoint" })
+    vim.keymap.set("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", { desc = "Set conditional breakpoint" })
+    vim.keymap.set("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>", { desc = "Set log point" })
+    vim.keymap.set("n", '<leader>br', dap.clear_breakpoints, { desc = "Clear breakpoints" })
+    vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Continue" })
+    vim.keymap.set("n", "<leader>dj", dap.step_over, { desc = "Step over" })
+    vim.keymap.set("n", "<leader>dk", dap.step_into, { desc = "Step into" })
+    vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "Step out" })
+    vim.keymap.set("n", '<leader>dd', dap.disconnect, { desc = "Disconnect" })
+    vim.keymap.set("n", '<leader>dt', dap.terminate, { desc = "Terminate" })
+    vim.keymap.set("n", "<leader>dr", dap.repl.toggle, { desc = "Open REPL" })
+    vim.keymap.set("n", "<leader>dl", dap.run_last, { desc = "Run last" })
+    vim.keymap.set("n", '<leader>di', dap_widgets.hover, { desc = "Variables" })
+    vim.keymap.set("n", '<leader>d?', function() dap_widgets.centered_float(dap_widgets.scopes) end, { desc = "Scopes" })
+    vim.keymap.set("n", '<leader>ba', '<cmd>Telescope dap list_breakpoints<cr>', { desc = "List breakpoints" })
+    vim.keymap.set("n", '<leader>df', '<cmd>Telescope dap frames<cr>', { desc = "List frames" })
+    vim.keymap.set("n", '<leader>dh', '<cmd>Telescope dap commands<cr>', { desc = "List commands" })
+
 end
 
 function M.gitsigns_keymaps(bufnr)
