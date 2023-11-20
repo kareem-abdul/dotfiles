@@ -1,0 +1,21 @@
+[alias]
+    logg = log --graph --decorate --abbrev-commit --format=format:'%>|(15)%C(bold blue)%h%Creset - %C(bold green)%><(15,trunc)(%ar)%Creset %C(dim white)%><(10,mtrunc)[%an]%Creset - %C(white)%s%Creset %C(bold yellow)%d%Creset'
+    loggd = log --graph --decorate --abbrev-commit --format=format:'%>|(15)%C(bold blue)%h%Creset - %C(bold green)%><(15,trunc)(%as)%Creset %C(dim white)%><(10,mtrunc)[%an]%Creset - %C(white)%s%Creset %C(bold yellow)%d%Creset'
+    pr = log --merges --decorate --format=format:'%C(bold blue)%h%Creset - %C(bold green)%><(15,trunc)(%as)%Creset %C(dim white)%><(10,trunc)[%an]%Creset - %C(bold white)%<(65,trunc)%b%Creset %C(dim green)%><(50,trunc)(%s)%Creset' 
+    pb = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
+    cb = "rev-parse --abbrev-ref HEAD"
+    logb = "!git logg \"$(git pb)\"..\"$(git cb)\""
+    co = checkout
+	br = branch
+    ci = commit
+    cim = commit -m
+	s = status
+    d = diff
+    p = "!git push origin $(git rev-parse --abbrev-ref HEAD)" 
+    pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
+    a = add
+    aa = add .
+[pager]
+	branch = false
+[pull]
+	rebase = true
