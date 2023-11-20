@@ -1,3 +1,4 @@
+return {};
 -- a plugin to manage databases from nvim
 -- return {
 --     'kristijanhusak/vim-dadbod-ui',
