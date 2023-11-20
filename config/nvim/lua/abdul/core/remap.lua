@@ -1,6 +1,5 @@
 local M = {};
 
-
 local function keymap(mode, lhs, rhs, desc, opts)
     if type(desc) == 'table' then
         opts = desc
@@ -220,3 +219,4 @@ end
 
 M.load_global()
 return M;
+
