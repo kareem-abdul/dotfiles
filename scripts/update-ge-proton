@@ -1,0 +1,50 @@
+#!/bin/bash
+
+DATA_PATH="$HOME/.local/share/GE-proton-update"
+
+echo "Fetching latest Ge-Proton"
+RELEASE=$(curl --progress-bar -fSL https://api.github.com/repos/GloriousEggroll/proton-ge-custom/releases/latest) 
+if [[ -z "$RELEASE" ]]; then
+	exit 0
+fi
+
+get() {
+	local value=$(printf "%s\n" "$RELEASE" | jq -r "$@")
+	printf "%s\n" "$value"
+}
+
+VERSION=$(get '.tag_name') 
+if [[ -f "$DATA_PATH/VERSION" ]]; then
+	CURRENT_VERSION=$(cat $DATA_PATH/VERSION)
+	if [[ "$VERSION" -eq "$CURRENT_VERSION" ]]; then
+		echo "Current version $CURRENT_VERSION. Already up to date"
+		exit 0;
+	fi
+fi
+
+echo "Latest $VERSION found"
+
+# ASSET=$(get '.assets[]|select(.content_type=="application/gzip")')
+ASSET=$(get ".assets[] | select(.name==\"$VERSION.tar.gz\")")
+if [[ -z "$ASSET" ]]; then
+	echo "Asset not found"
+	exit 1;
+fi
+
+ASSET_NAME=$(echo "$ASSET" | jq -r '.name')
+URL=$(echo "$ASSET" | jq -r '.browser_download_url')
+
+echo "downloading $ASSET_NAME"
+curl --progress-bar -o $HOME/Downloads/$ASSET_NAME -fSL $URL
+
+echo "extracting to steam"
+tar -xzf $HOME/Downloads/$ASSET_NAME -C $HOME/.steam/root/compatibilitytools.d
+
+if [[ ! -d "$HOME/.local/share/GE-proton-update" ]]; then
+	mkdir -p $HOME/.local/share/GE-proton-update
+fi
+echo "$VERSION" > $HOME/.local/share/GE-proton-update/VERSION
+
+echo "Changes:"
+echo $(get '.body')
+
