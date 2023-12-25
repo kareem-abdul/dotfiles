@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Script for disabling devices that causes system to wake from suspended state
+# This file needs to be placed in the /usr/lib/systemd/system-sleep (systemd automatically executes scripts placed here when system goes to suspend state)
+#
+# https://askubuntu.com/questions/1395148/pc-wakes-up-immediately-after-suspend
+case $1 in
+	pre)
+		declare -a devices=(GP12 GP13 XHC0 GPP0 GPP8)
+	       # <- space seperated devices that cause system to immedietly wake up after a suspend, from /proc/acpi/wakeup
+
+		for device in "${devices[@]}"; do
+			if $(grep -qw "^${device}.*enabled" /proc/acpi/wakeup); then
+				echo ${device} > /proc/acpi/wakeup
+			fi
+		done
+	;;
+esac
