@@ -16,9 +16,20 @@ opt.incsearch = true
 
 opt.termguicolors = true
 opt.background = "dark"
-opt.colorcolumn = "120"
+opt.colorcolumn = "150"
 opt.signcolumn = "yes"
 
 opt.scrolloff = 8
 opt.updatetime = 50
 opt.wrap = false
+
+-- netrw options
+vim.g.netrw_banner = 0
+vim.g.netrw_browse_split = 0
+vim.g.netrw_liststyle = 3
+
+-- function tree_sitter_options()
+--     opt.foldlevel = 20
+--     opt.foldmethod = "expr"
+--     opt.foldexpr = require("treesitter").fold
+-- end
