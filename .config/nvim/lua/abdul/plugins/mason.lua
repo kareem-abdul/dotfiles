@@ -11,6 +11,10 @@ return    {
                     package_pending = "➜",
                     package_uninstalled = "✗"
                 }
+            },
+            registries = {
+                "file:" .. vim.fn.stdpath('config'),
+                "github:mason-org/mason-registry"
             }
         });
         require('mason-lspconfig').setup({
