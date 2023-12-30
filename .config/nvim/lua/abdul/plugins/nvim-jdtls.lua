@@ -6,12 +6,9 @@ return {
 
         vim.api.nvim_create_autocmd('FileType', {
             pattern = 'java',
-            callback = function (ev)
-               require("abdul.plugins.lsp.jdtls").setup();
-            end,
-            group = vim.api.nvim_create_augroup('jdtls_attach_java', { clear = true })
+            callback = require("abdul.plugins.lsp.jdtls").setup,
+            group = java_jdtls_group
         })
 
-        require("abdul.plugins.lsp.jdtls").setup();
     end
 }

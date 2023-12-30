@@ -10,13 +10,31 @@ local function get_jdtls_config()
     }
 end
 
+local function find_root(markers)
+    return vim.fs.dirname(vim.fs.find(markers, { upward = true})[1])
+end
+
+local function get_bundles()
+    -- /home/kareem/.local/share/nvim/mason/packages/java-test/extension/server
+    local bundles = {
+        vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar')
+    };
+    vim.list_extend(bundles, vim.split(vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/java-test/extension/server/*.jar'), "\n"))
+    bundles = vim.tbl_filter(function(s)
+        return not vim.endswith(s, "com.microsoft.java.test.runner-jar-with-dependencies.jar")
+    end, bundles)
+    return bundles;
+end
+
+local function on_attach(client, bufnr)
+    require('jdtls').setup_dap({ hotcodereplace = 'auto', config_overrides = {} })
+    require("jdtls.dap").setup_dap_main_class_configs();
+    require("abdul.core.remap").lsp_config_keymaps(client, bufnr)
+    require("abdul.core.remap").jdtls_keymaps(bufnr);
+    vim.lsp.codelens.refresh()
+end;
+
 function M.setup()
-    local on_attach = function(client, bufnr)
-        require('jdtls').setup_dap({ hotcodereplace = 'auto' })
-        require("jdtls.dap").setup_dap_main_class_configs();
-        require("abdul.core.remap").lsp_config_keymaps(bufnr)
-        vim.lsp.codelens.refresh()
-    end;
     local capabilities = require('cmp_nvim_lsp').default_capabilities();
     local jdtls = utils.load("jdtls")
     if not jdtls then
@@ -24,27 +42,14 @@ function M.setup()
         return
     end
 
-    local system = vim.uv.os_uname().sysname;
+    -- see :h filename-modifiers
+    local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 
     local jdtls_path = vim.fn.stdpath('data') .. '/mason/packages/jdtls'
-    local jdtls_config_path = jdtls_path .. get_jdtls_config()[system]
-    local jdtls_plugins_path = jdtls_path .. '/plugins'
-    local project_markers = { '.git', 'mvnw', 'gradlew', 'pom.xml', 'build.gradle' }
 
-    local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t") -- see :h filename-modifiers
-    local workspace_dir = vim.fn.stdpath('data') .. '/java/workspace-root/' .. project_name
-    local jar_dir = vim.fn.glob(jdtls_plugins_path .. '/org.eclipse.equinox.launcher_*.jar')
-    local dap_path = vim.fn.stdpath('data') .. '/mason/packages/java-debug-adapter'
-    -- /home/kareem/.local/share/nvim/mason/packages/java-test/extension/server
-    local java_test = vim.fn.glob(vim.fn.stdpath('data') .. '/mason/packages/java-test/extension/server/*.jar', 1);
-
-    local bundles = {
-        vim.fn.glob(dap_path .. '/extension/server/com.microsoft.java.debug.plugin-*.jar', 1)
-    };
-    vim.list_extend(bundles, vim.split(java_test, "\n"))
-
-
-    local config = {
+    local project_markers = { 'pom.xml', 'settings.gradle', 'build.gradle', 'mvnw', 'gradlew', '.git'} -- { "gradlew", ".git", "mvnw"}
+    local root_dir = find_root(project_markers);-- require('jdtls.setup').find_root(project_markers)
+    jdtls.start_or_attach({
         capabilities = capabilities,
         on_attach = on_attach,
         flags = {
@@ -64,13 +69,13 @@ function M.setup()
             '--add-opens', 'java.base/java.util=ALL-UNNAMED',
             '--add-opens', 'java.base/java.lang=ALL-UNNAMED',
 
-            '-jar', jar_dir,
-            '-configuration', jdtls_config_path,
-            '-data', workspace_dir,
+            '-jar', vim.fn.glob(jdtls_path .. '/plugins/org.eclipse.equinox.launcher_*.jar'),
+            '-configuration', jdtls_path .. get_jdtls_config()[vim.uv.os_uname().sysname],
+            '-data', vim.fn.stdpath('data') .. '/java/workspace-root/' .. project_name,
         },
-        root_dir = require('jdtls.setup').find_root(project_markers),
+        root_dir = root_dir,
         init_options = {
-            bundles = bundles
+            bundles = get_bundles()
         },
 
         -- Here you can configure eclipse.jdt.ls specific settings
@@ -130,8 +135,7 @@ function M.setup()
 
             }
         }
-    };
-    jdtls.start_or_attach(config)
+    })
 end
 
 return M;
