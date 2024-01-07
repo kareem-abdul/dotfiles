@@ -1,9 +1,23 @@
 #!/bin/bash
 
+declare -a PATHS
+if [[ -z "$PROJECT_PATHS" ]]; then
+	PATHS=("$HOME/Documents/projects" "$HOME/workspace/projects")
+else
+	PATHS=( $PROJECT_PATHS )
+fi
+
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/workspace/projects -mindepth 3 -maxdepth 3 -type d | fzf)
+    selected=$({
+	for path in "${PATHS[@]}"; do
+		if [[ ! -d $path ]]; then
+			continue
+		fi
+		find $path -mindepth 2 -maxdepth 2 -type d;
+	done
+    } | sort -u | fzf)
 fi
 
 if [[ -z $selected ]]; then
