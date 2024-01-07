@@ -8,7 +8,15 @@ return {
         'nvim-tree/nvim-web-devicons',
     },
     config = function()
-        local mappings = require("abdul.core.remap").telescope_keymaps();
+        local form_entry = require("telescope.from_entry")
+        local f_path = form_entry.path
+        form_entry.path = function(entry, validate, escape)
+            if entry.filename and vim.startswith(entry.filename, "jdt://") then
+                return entry.filename
+            end
+            return f_path(entry, validate, escape)
+        end
+
         require("telescope").setup({
             defaults = {
                 vimgrep_arguments = {
@@ -22,7 +30,7 @@ return {
                     '--hidden',
                 },
                 file_ignore_patterns = { ".git", "node_modules" },
-                mappings = mappings,
+                mappings = require("abdul.core.remap").telescope_keymaps(),
                 path_diplay = { shorten = 3 },
                 sorting_strategy = "ascending",
                 layout_config = {
@@ -31,6 +39,15 @@ return {
                         prompt_position = 'top',
                         preview_width = 0.45,
                     }
+                },
+                preview = {
+                    filetype_hook = function(filepath, bufnr, opts)
+                        if vim.startswith(filepath, "jdt://") then
+                            vim.api.nvim_buf_call(bufnr, function() require("jdtls").open_classfile(filepath) end)
+                            return true
+                        end
+                        return true
+                    end,
                 }
             }
         })
