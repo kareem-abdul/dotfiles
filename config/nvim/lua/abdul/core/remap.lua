@@ -90,6 +90,7 @@ function M.telescope_keymaps()
     keymap('n', '<leader>lg', builtin.live_grep, "Live search project files")
     keymap('n', '<leader>/', function() builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({ winblend = 10, previewer = false })) end, "Fuzzy search current buffer")
     keymap('n', '<leader>sr', builtin.resume, "Resume last search")
+    keymap('n', '<leader>ts', builtin.lsp_document_symbols, "View document symbols")
     return {
         i = {
             ["<C-j>"] = actions.move_selection_next,
@@ -134,10 +135,10 @@ function M.lsp_config_keymaps(client, bufnr)
 
     -- vim.lsp.inlay_hint(bufnr, true);
 
-    keymap("n", "gd", function() builtin.lsp_definitions() end, opts)
-    keymap("n", "gr", function() builtin.lsp_references({ fname_width = 100 }) end, opts)
-    keymap("n", "gi", function() builtin.lsp_implementations() end, opts)
-    keymap("n", "gt", function() builtin.lsp_type_definitions() end, opts)
+    keymap("n", "gd", builtin.lsp_definitions(), opts)
+    keymap("n", "gr", builtin.lsp_references, opts)
+    keymap("n", "gi", builtin.lsp_implementations, opts)
+    keymap("n", "gt", builtin.lsp_type_definitions, opts)
     keymap("n", "gD", function() builtin.diagnostics({ bufnr = bufnr }) end, opts)
 
     keymap("n", "<leader>rs", ":LspRestart<CR>", opts)
@@ -166,6 +167,7 @@ function M.dap_keymaps()
     keymap("n", '<leader>dk', dap_widgets.hover, "[dap] hover widget")
     keymap("n", '<leader>d?', function() dap_widgets.centered_float(dap_widgets.scopes) end, "[dap] centered float")
     keymap("n", '<leader>du', require("dapui").toggle, "[dap] toggle dap ui")
+    keymap("n", '<leader>df', '<cmd>Telescope dap configurations<CR>', "[dap] view dap configurations")
     -- keymap("n", '<leader>ba', '<cmd>Telescope dap list_breakpoints<cr>')
     -- keymap("n", '<leader>df', '<cmd>Telescope dap frames<cr>')
     -- keymap("n", '<leader>dh', '<cmd>Telescope dap commands<cr>')

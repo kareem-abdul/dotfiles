@@ -4,6 +4,7 @@ return {
     dependencies = {
         'nvim-lua/plenary.nvim',
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+        'nvim-telescope/telescope-dap.nvim',
         'kareem-abdul/harpoon',
         'nvim-tree/nvim-web-devicons',
     },
@@ -53,6 +54,7 @@ return {
         })
         require('telescope').load_extension('fzf')
         require("telescope").load_extension('harpoon')
+        require("telescope").load_extension('dap')
     end
 
 }
