@@ -59,7 +59,6 @@ setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_REDUCE_BLANKS
 
-
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
@@ -80,7 +79,6 @@ setopt HIST_REDUCE_BLANKS
 
 # remove duplicate entries in the peco-history
 ZSH_PECO_HISTORY_DEDUP=1
-
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -137,3 +135,11 @@ start_tmux
 # For a full list of active aliases, run `alias`.
 #
 
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
