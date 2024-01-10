@@ -74,12 +74,12 @@ return {
         require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
             sources = {
                 { name = "dap" },
-                { name = 'treesitter' },
-                { name = 'nvim_lsp' },
-                { name = 'luasnip' },
-
-                { name = 'nvim_lua' },
-                { name = 'path' },
+                -- { name = 'treesitter' },
+                -- { name = 'nvim_lsp' },
+                -- { name = 'luasnip' },
+                --
+                -- { name = 'nvim_lua' },
+                -- { name = 'path' },
             },
         })
     end
