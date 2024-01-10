@@ -135,10 +135,11 @@ function M.lsp_config_keymaps(client, bufnr)
 
     -- vim.lsp.inlay_hint(bufnr, true);
 
-    keymap("n", "gd", builtin.lsp_definitions(), opts)
+    keymap("n", "gd", builtin.lsp_definitions, opts)
     keymap("n", "gr", builtin.lsp_references, opts)
     keymap("n", "gi", builtin.lsp_implementations, opts)
     keymap("n", "gt", builtin.lsp_type_definitions, opts)
+    keymap('n', 'gs', builtin.lsp_document_symbols, "View document symbols")
     keymap("n", "gD", function() builtin.diagnostics({ bufnr = bufnr }) end, opts)
 
     keymap("n", "<leader>rs", ":LspRestart<CR>", opts)
