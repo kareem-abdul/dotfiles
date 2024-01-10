@@ -90,7 +90,6 @@ function M.telescope_keymaps()
     keymap('n', '<leader>lg', builtin.live_grep, "Live search project files")
     keymap('n', '<leader>/', function() builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({ winblend = 10, previewer = false })) end, "Fuzzy search current buffer")
     keymap('n', '<leader>sr', builtin.resume, "Resume last search")
-    keymap('n', '<leader>ts', builtin.lsp_document_symbols, "View document symbols")
     return {
         i = {
             ["<C-j>"] = actions.move_selection_next,
@@ -120,31 +119,30 @@ function M.lsp_config_keymaps(client, bufnr)
     local builtin = require("telescope.builtin");
     local opts = { buffer = bufnr, noremap = true, silent = false };
 
-    keymap("n", "<leader>gd", vim.lsp.buf.definition, opts)
-    keymap("n", "<leader>gr", vim.lsp.buf.references, opts)
-    keymap("n", "<leader>vrn", vim.lsp.buf.rename, opts)
-    keymap("n", "<leader>vgd", vim.diagnostic.open_float, opts)
-    keymap("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
-    keymap("n", "K", vim.lsp.buf.hover, opts)
+    keymap("n", "<leader>gd", vim.lsp.buf.definition, "[lsp] goto definition", opts)
+    keymap("n", "<leader>gr", vim.lsp.buf.references, "[lsp] goto references", opts)
+    keymap("n", "<leader>vrn", vim.lsp.buf.rename, "[lsp] rename symbol", opts)
+    keymap("n", "<leader>vws", vim.lsp.buf.workspace_symbol, "[lsp] list all workspace symbols in qf", opts)
+    keymap("n", "<leader>ca", vim.lsp.buf.code_action, "[lsp] code action", opts)
+    keymap("n", "<leader>=", function() vim.lsp.buf.format({ async = true }) end, "[lsp] format current buffer", opts)
+    keymap("n", "K", vim.lsp.buf.hover, "[lsp] show doc / hover", opts)
+    keymap("n", "<C-h>", function() vim.lsp.inlay_hint(bufnr, nil) end, "[lsp] enable buffer inlay hint", opts)
+    keymap("i", "<C-h>", vim.lsp.buf.signature_help, "[lsp] show signature", opts)
 
-    keymap("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-    keymap("n", "[d", vim.diagnostic.goto_next, opts)
-    keymap("n", "]d", vim.diagnostic.goto_prev, opts)
-    keymap("i", "<C-h>", vim.lsp.buf.signature_help, opts)
-    keymap("n", "<C-h>", function() vim.lsp.inlay_hint(bufnr, nil) end, "inlay hint", opts)
+    keymap("n", "<leader>vgd", vim.diagnostic.open_float, "[diag] open diagnostic float", opts)
+    keymap("n", "[d", vim.diagnostic.goto_next, "[diag] go to next diagnostic", opts)
+    keymap("n", "]d", vim.diagnostic.goto_prev, "[diag] go to prev diagnostic", opts)
 
     -- vim.lsp.inlay_hint(bufnr, true);
 
-    keymap("n", "gd", builtin.lsp_definitions, opts)
-    keymap("n", "gr", builtin.lsp_references, opts)
-    keymap("n", "gi", builtin.lsp_implementations, opts)
-    keymap("n", "gt", builtin.lsp_type_definitions, opts)
-    keymap('n', 'gs', builtin.lsp_document_symbols, "View document symbols")
-    keymap("n", "gD", function() builtin.diagnostics({ bufnr = bufnr }) end, opts)
+    keymap("n", "gd", builtin.lsp_definitions, "[telescope][lsp] view definitions", opts)
+    keymap("n", "gr", builtin.lsp_references, "[telescope][lsp] view references", opts)
+    keymap("n", "gi", builtin.lsp_implementations, "[telescope][lsp] view implementations", opts)
+    keymap("n", "gt", builtin.lsp_type_definitions, "[telescope][lsp] view type definitions", opts)
+    keymap('n', 'gs', builtin.lsp_document_symbols, "[telescope][lsp] View document symbols")
+    keymap("n", "gD", function() builtin.diagnostics({ bufnr = bufnr }) end,"[telescope][diag] view buffer diagnostics", opts)
 
-    keymap("n", "<leader>rs", ":LspRestart<CR>", opts)
-
-    keymap("n", "<leader>=", function() vim.lsp.buf.format({ async = true }) end, opts)
+    keymap("n", "<leader>rs", ":LspRestart<CR>", "restart lsp", opts)
 
     M.dap_keymaps()
 end
