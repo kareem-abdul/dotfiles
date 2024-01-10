@@ -11,7 +11,7 @@ local function get_jdtls_config()
 end
 
 local function find_root(markers)
-    return vim.fs.dirname(vim.fs.find(markers, { upward = true})[1])
+    return vim.fs.dirname(vim.fs.find(markers, { upward = true })[1])
 end
 
 local function get_bundles()
@@ -64,7 +64,7 @@ function M.setup()
             '-Dlog.protocol=true',
             '-Dlog.level=ALL',
             '-javaagent:' .. jdtls_path .. '/lombok.jar',
-            '-Xmx1g', -- max heap size JVM can allocate (use Xms  to set minimun heap size)
+            '-Xmx4g', -- max heap size JVM can allocate (use Xms  to set minimun heap size)
             '--add-modules=ALL-SYSTEM',
             '--add-opens', 'java.base/java.util=ALL-UNNAMED',
             '--add-opens', 'java.base/java.lang=ALL-UNNAMED',

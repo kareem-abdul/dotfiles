@@ -1,3 +1,5 @@
+#!/bin/bash
+
 alias zshconf="vim ~/.zshrc"
 alias tmuxconf="vim ~/.tmux.conf"
 alias sshconf="vim ~/.ssh/config" 
@@ -26,7 +28,7 @@ then
 else
     echo "not supported display server $XDG_SESSION_TYPE"
 fi
-alias v="vim"
+alias v="nvim"
 
 
 # docker containers

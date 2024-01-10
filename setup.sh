@@ -18,30 +18,25 @@ function isInstalled() {
 
 # scripts
 if ! isInstalled "scripts"; then
-    echo "setting up scripts"
-    for script in $(pwd)/.local/bin/*; do
-        echo "linking $script"
-        ln -s $script ~/.local/bin/$(basename $script)
-    done
+    echo "setting up scripts to ~/.local/bin"
+    [[ ! -d "$HOME/.local/bin" ]] && mkdir -p $HOME/.local/bin
+    ln -s $PWD/scripts $HOME/.local/bin/scripts
     echo "scripts" >> installed
+    echo "make sure that the path $HOME/.local/bin/scripts is in your PATH variable"
 fi
 
-# tmux
-if ! isInstalled "tmux"; then
-    echo "Setting up tmux config"
-    if [[ -f "$HOME/.tmux.conf" ]]; then
-        mv ~/.tmux.conf ~/.dotfiles.bak/.tmux.conf.$(date "+%H:%M:%S:%N")
+# configs
+for path in $PWD/config/*; do
+    config=$(basename $path)
+    if ! isInstalled "$config"; then
+        echo "Configuring $config"
+        dest="$HOME/.config/$config"
+        if [[ -f "$dest" || -d "$dest" ]]; then
+            echo "Existing $config config found at $dest. Backing it up to $HOME/.dotfiles.bak"
+            mv $dest ~/.dotfiles.bak/$config.$(date "+%H:%M:%S:%N").bak
+        fi
+        ln -s $path $HOME/.config/$config
+        echo "$config" >> installed
     fi
-    ln -s $(pwd)/.tmux.conf ~/.tmux.conf
-    echo "tmux" >> installed
-fi
+done
 
-# nvim
-if ! isInstalled "nvim"; then 
-    echo "setting up nvim config"
-    if [[ -d "$HOME/.config/.nvim" ]]; then
-        mv ~/.config/nvim ~/.dotfiles.bak/.config/nvim.$(date "+H:%M:%S:%N")
-    fi
-    ln -s $(pwd)/.config/nvim ~/.config/nvim
-    echo "nvim" >> installed
-fi

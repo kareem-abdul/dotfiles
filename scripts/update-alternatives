@@ -1,0 +1,6 @@
+#!/bin/bash
+
+ALTERNATIVES=$(cat $HOME/.local/state/alternatives/state)
+
+
+
