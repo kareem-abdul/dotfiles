@@ -175,8 +175,12 @@ end
 function M.jdtls_keymaps(bufnr)
     local opts = { buffer = bufnr, noremap = true, silent = false };
     local jdtls = require("jdtls");
-    keymap("n", "<leader>tm", jdtls.test_nearest_method, "[jdtls] test menthod", opts)
-    keymap("n", "<leader>tc", jdtls.test_class, "[jdtls] test class", opts)
+
+    keymap("n", "<leader>jev", jdtls.extract_variable, "[jdtls] extract variable", opts)
+    keymap("n", "<leader>jec", jdtls.extract_constant, "[jdlts] extract constant", opts)
+    keymap("n", "<leader>jem", jdtls.extract_method, "[jdtls] extract method", opts)
+    keymap("n", "<leader>jtm", jdtls.test_nearest_method, "[jdtls] test menthod", opts)
+    keymap("n", "<leader>jtc", jdtls.test_class, "[jdtls] test class", opts)
 end
 
 function M.gitsigns_keymaps(bufnr)
