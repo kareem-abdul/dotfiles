@@ -218,6 +218,12 @@ function M.gitsigns_keymaps(bufnr)
     keymap({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', "select hunk", opts)
 end
 
+function M.git_worktree_keymaps()
+    local telescope = require("telescope")
+    keymap("n", "<leader>gw", telescope.extensions.git_worktree.git_worktrees)
+    keymap("n", "<leader>gwc", telescope.extensions.git_worktree.create_git_worktree)
+end
+
 function M.eslint_lsp_keymaps(buffnr)
     keymap("n", "<leader>=", ":EslintFixAll<CR>", { buffer = buffnr, noremap = true, silent = true })
 end

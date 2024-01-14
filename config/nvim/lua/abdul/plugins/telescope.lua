@@ -7,8 +7,10 @@ return {
         'nvim-telescope/telescope-dap.nvim',
         'kareem-abdul/harpoon',
         'nvim-tree/nvim-web-devicons',
+        'polarmutex/git-worktree.nvim',
     },
     config = function()
+        local telescope = require('telescope')
         local form_entry = require("telescope.from_entry")
         local f_path = form_entry.path
         form_entry.path = function(entry, validate, escape)
@@ -35,7 +37,7 @@ return {
             end,
         })
 
-        require("telescope").setup({
+        telescope.setup({
             defaults = {
                 vimgrep_arguments = {
                     'rg',
@@ -69,9 +71,10 @@ return {
                 }
             }
         })
-        require('telescope').load_extension('fzf')
-        require("telescope").load_extension('harpoon')
-        require("telescope").load_extension('dap')
+        telescope.load_extension('fzf')
+        telescope.load_extension('harpoon')
+        telescope.load_extension('dap')
+        telescope.load_extension("git_worktree")
     end
 
 }
