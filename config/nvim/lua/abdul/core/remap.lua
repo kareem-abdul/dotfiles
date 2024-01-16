@@ -14,7 +14,7 @@ function M.load_global()
     vim.g.mapleader = " "
     keymap("n", "Q", "<nop>")
     -- keymap("n", "<leader>pv", vim.cmd.Ex, "netrw: explore files")
-    keymap("n", "<leader>pv", "<cmd>Oil .<CR>", "oil explore files")
+    keymap("n", "<leader>pv", "<cmd>Oil<CR>", "oil explore files")
     keymap("n", "<leader>o", "o<ESC>", "Create a new line below current line in normal mode")
     keymap("n", "<leader>O", "O<ESC>", "Create a new line above current line in normal mode")
     keymap("n", "n", "nzzzv", "Goto next")
