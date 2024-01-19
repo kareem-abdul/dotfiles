@@ -109,12 +109,35 @@ return {
             color = { fg = colors.violet, gui = 'bold' },
         }
 
+        -- ins_left {
+        --     'filename',
+        --     cond = conditions.buffer_not_empty,
+        --     file_status = true, path = 1,
+        --     shorting_target = 200,
+        --     color = { fg = colors.magenta },
+        -- }
         ins_left {
-            'filename',
-            cond = conditions.buffer_not_empty,
-            file_status = true, path = 1,
-            shorting_target = 200,
-            color = { fg = colors.magenta },
+            function ()
+                local fn = vim.fn.expand('%:~:.')
+                if vim.bo.filetype == "java" then
+                    fn = require("abdul.core.utils.java-utils").canonical_name(0, fn)
+                end
+                if fn == '' then
+                    fn = '[No Name]'
+                end
+                if vim.bo.modified then
+                    fn = fn .. ' [+]'
+                end
+                if vim.bo.modifiable == false or vim.bo.readonly == true then
+                    fn = fn .. ' [readonly]'
+                end
+                local tfn = vim.fn.expand('%')
+                if tfn ~= '' and vim.bo.buftype == '' and vim.fn.filereadable(tfn) == 0 then
+                    fn = fn .. ' [New]'
+                end
+                return fn
+            end,
+            color = { fg = colors.magenta }
         }
 
         ins_left {
