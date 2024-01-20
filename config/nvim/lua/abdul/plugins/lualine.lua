@@ -120,7 +120,7 @@ return {
             function ()
                 local fn = vim.fn.expand('%:~:.')
                 if vim.bo.filetype == "java" then
-                    fn = require("abdul.core.utils.java-utils").canonical_name(0, fn)
+                    fn = require("abdul.core.utils.java").canonical_name(0, fn)
                 end
                 if fn == '' then
                     fn = '[No Name]'
