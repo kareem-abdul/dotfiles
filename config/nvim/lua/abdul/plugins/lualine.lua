@@ -62,6 +62,7 @@ return {
                 lualine_c = {},
                 lualine_x = {},
             },
+            extensions = { 'oil' }
         }
 
         local function ins_left(component)
