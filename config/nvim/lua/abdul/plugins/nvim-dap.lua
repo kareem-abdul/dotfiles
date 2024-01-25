@@ -26,6 +26,7 @@ return {
         "rcarriga/nvim-dap-ui",
     },
     config = function()
+        require("abdul.core.remap").dap_keymaps()
         local dap, dapui = require("dap"), require("dapui")
         dapui.setup({
             layouts = dap_ui_layout,

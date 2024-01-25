@@ -145,8 +145,6 @@ function M.lsp_config_keymaps(client, bufnr)
     keymap("n", "gD", function() builtin.diagnostics({ bufnr = bufnr }) end,"[telescope][diag] view buffer diagnostics", opts)
 
     keymap("n", "<leader>rs", ":LspRestart<CR>", "restart lsp", opts)
-
-    M.dap_keymaps()
 end
 
 function M.dap_keymaps()
@@ -154,8 +152,12 @@ function M.dap_keymaps()
     local dap = require("dap");
     local dap_widgets = require("dap.ui.widgets");
     keymap("n", "<leader>bb", dap.toggle_breakpoint)
-    keymap("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>")
-    vim.keymap.set("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>")
+    keymap("n", "<leader>bc", function ()
+       vim.ui.input({ prompt = "Breakpoint condiion : " }, function (input) require('dap').set_breakpoint(input) end)
+    end, "[dap] conditional breakpoint")
+    keymap("n", "<leader>bl", function ()
+       vim.ui.input({ prompt = "Log point message : " }, function (input) require('dap').set_breakpoint(nil, nil, input) end)
+    end, "[dap] breakpoint log message")
     keymap("n", '<leader>br', dap.clear_breakpoints, "[dap] clear breakpoints")
     keymap("n", "<leader>dc", dap.continue, "[dap] continue")
     keymap("n", "<leader>dn", dap.step_over, "[dap] step over")
