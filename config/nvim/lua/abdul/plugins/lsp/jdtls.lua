@@ -107,8 +107,8 @@ function M.setup()
                     insertSpaces = true,
                     tabsize = 4,
                     settings = {
-                        profile = "Intellij",
-                        url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/intellij-java-google-style.xml"
+                        profile = "GoogleStyle",
+                        url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml"
                     }
                 },
                 implementationsCodeLens = { enabled =  true },
