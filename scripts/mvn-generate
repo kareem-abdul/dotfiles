@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ ! -f "./mvnw" ]]; then
+    echo "You need maven to run this script";
+    exit 1;
+fi
+
+./mvnw archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
