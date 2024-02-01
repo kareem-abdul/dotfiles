@@ -1,16 +1,17 @@
 local dap = require("dap")
 
-local debugger_path = vim.fn.stdpath('data') .. '/mason/packages/js-debug-adapter'
-
-dap.adapters["pwa-node"] = {
-    type = "server",
-    host = "localhost",
-    port = "${port}",
-    executable = {
-        command = debugger_path .. "/js-debug-adapter",
-        args = { "${port}" }
+if not dap.adapters["pwa-node"] then
+    local debugger_path = vim.fn.stdpath('data') .. '/mason/packages/js-debug-adapter'
+    dap.adapters["pwa-node"] = {
+        type = "server",
+        host = "localhost",
+        port = "${port}",
+        executable = {
+            command = debugger_path .. "/js-debug-adapter",
+            args = { "${port}" }
+        }
     }
-}
+end
 
 dap.configurations.javascript = {
     {
@@ -28,5 +29,4 @@ dap.configurations.javascript = {
         cwd = "${workspaceFolder}",
     },
 }
-
 
