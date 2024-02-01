@@ -50,7 +50,7 @@ return {
             if not file or not vim.endswith(file, ".lua") then
                 break
             end
-            print("abdul.plugins.dap." .. string.gsub(file, ".lua", ""))
+            require("abdul.plugins.dap." .. string.gsub(file, ".lua", ""))
         end
     end
 }
