@@ -23,7 +23,8 @@ return {
             ensure_installed = {
                 "yq",
                 "java-test",
-                "java-debug-adapter"
+                "java-debug-adapter",
+                "ts-node",
             },
             run_on_start = true
         });
