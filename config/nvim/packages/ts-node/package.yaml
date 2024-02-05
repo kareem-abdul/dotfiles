@@ -1,0 +1,14 @@
+---
+name: ts-node
+description: |
+  A runtime for typescript
+homepage: https://github.com/TypeStrong/ts-node
+licenses:
+  - MIT
+languages:
+  - Typescript
+categories:
+  - DAP
+
+source:
+  id: pkg:npm/ts-node@10.9.2
