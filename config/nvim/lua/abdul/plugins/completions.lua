@@ -71,16 +71,16 @@ return {
             })
         });
 
-        require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-            sources = {
+        cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover", }, {
+            sources = cmp.config.sources({
                 { name = "dap" },
+                { name = 'nvim_lsp' },
+                { name = 'path' },
                 -- { name = 'treesitter' },
-                -- { name = 'nvim_lsp' },
                 -- { name = 'luasnip' },
                 --
                 -- { name = 'nvim_lua' },
-                -- { name = 'path' },
-            },
+            }),
         })
     end
 }
