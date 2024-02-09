@@ -1,4 +1,3 @@
-
 local function setup_signs()
     local signs = { Error = "E", Warn = "W", Hint = "H", Info = "I" }
     for type, icon in pairs(signs) do
@@ -22,6 +21,10 @@ return {
 
         local on_attach = function(client, bufnr) remap.lsp_config_keymaps(client, bufnr) end;
         local capabilities = require('cmp_nvim_lsp').default_capabilities();
+        capabilities.textDocument.foldingRange = {
+            dynamicRegistration = false,
+            lineFoldingOnly = true
+        }
         require("mason-lspconfig").setup_handlers({
             function(server_name)
                 if server_name == 'jdtls' then
@@ -37,7 +40,7 @@ return {
                     on_attach = on_attach,
                 });
             end,
-       })
+        })
+        require("kevinhwang91/nvim-ufo");
     end
 }
-
