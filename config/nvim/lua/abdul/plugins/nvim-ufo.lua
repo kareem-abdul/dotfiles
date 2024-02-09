@@ -39,9 +39,33 @@ return {
         vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
         vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 
+        local ftMap = {
+            java = { 'lsp', 'treesitter' },
+            javascript = { 'lsp', 'treesitter' },
+            typescript = { 'lsp', 'treesitter' },
+            vim = { 'indent' },
+            json = { 'treesitter' },
+        }
+
         require('ufo').setup({
+            open_fold_hl_timeout = 150,
+            enable_get_fold_virt_text = false,
+            preview = {
+                win_config = {
+                    border = { '', '─', '', '', '', '─', '', '' },
+                    winhighlight = 'Normal:Folded',
+                    winblend = 0
+                },
+                mappings = {
+                    scrollU = '<C-u>',
+                    scrollD = '<C-d>',
+                    jumpTop = '[',
+                    jumpBot = ']'
+                }
+            },
+            close_fold_kinds = { 'imports', 'comment' },
             provider_selector = function(bufnr, filetype, buftype)
-                return { 'treesitter', 'indent' }
+                return ftMap[filetype] or { 'treesitter', 'indent' }
             end,
             fold_virt_text_handler = handler
         })
