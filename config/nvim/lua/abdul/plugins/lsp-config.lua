@@ -41,6 +41,6 @@ return {
                 });
             end,
         })
-        require("kevinhwang91/nvim-ufo");
+        require("ufo");
     end
 }
