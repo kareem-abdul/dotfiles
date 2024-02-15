@@ -23,4 +23,4 @@ r() {
     echo "$formatted" | column -ts'|'
 
 }
-r
+r $@
