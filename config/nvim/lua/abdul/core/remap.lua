@@ -89,7 +89,7 @@ function M.telescope_keymaps()
     end, "Find git files");
     keymap('n', '<leader>pf', function() builtin.find_files({ hidden = true, no_ignore = true }) end, "find project files");
     keymap('n', '<leader>lg', builtin.live_grep, "Live search project files")
-    keymap('n', '<leader>/', function() builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({ winblend = 10, previewer = false })) end, "Fuzzy search current buffer")
+    keymap('n', '<leader>/', function() builtin.current_buffer_fuzzy_find() end, "Fuzzy search current buffer")
     keymap('n', '<leader>sr', builtin.resume, "Resume last search")
     return {
         i = {
