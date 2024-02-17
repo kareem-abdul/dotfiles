@@ -3,8 +3,24 @@ return {
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" }, -- https://tech.saigonist.com/b/code/list-all-vim-script-events.html
     config = function()
+        -- use :InspectTree to view tree
         require("nvim-treesitter.configs").setup({
-            ensure_installed = { "dockerfile", "javascript", "typescript", "java", "c", "lua", "vim", "vimdoc", "query", "html" },
+            ensure_installed = {
+                "javascript",
+                "typescript",
+                "tsx",
+                "java",
+                "c",
+                "lua",
+                "html",
+                "css",
+                "json",
+
+                "dockerfile",
+                "vim",
+                "vimdoc",
+                "query",
+            },
             sync_install = false,
 
             -- Automatically install missing parsers when entering buffer
@@ -19,6 +35,9 @@ return {
                 -- Using this option may slow down your editor, and you may see some duplicate highlights.
                 -- Instead of true it can also be a list of languages
                 additional_vim_regex_highlighting = false,
+            },
+            indent = {
+                enabled = true,
             },
         })
     end
