@@ -37,13 +37,14 @@ function M.load_global()
     keymap("v", "<leader>y", "\"+y", "Copy selection to system clipboard")
     keymap("n", "<leader>Y", "\"+Y", "Copy line to system clipboard")
 
+    -- removed due to ../plugins/autopairs.lua
     -- auto close paranthesis, braces, brackets, quotes etc.
-    keymap("i", '"', '""<left>');
-    keymap("i", "'", "''<left>");
-    keymap("i", "(", "()<left>");
-    keymap("i", "[", "[]<left>");
-    keymap("i", "{", "{}<left>");
-    keymap("i", "{<CR>", "{<CR>}<ESC>O");
+    -- keymap("i", '"', '""<left>');
+    -- keymap("i", "'", "''<left>");
+    -- keymap("i", "(", "()<left>");
+    -- keymap("i", "[", "[]<left>");
+    -- keymap("i", "{", "{}<left>");
+    -- keymap("i", "{<CR>", "{<CR>}<ESC>O");
 
     -- resize panes
     keymap("n", "<C-w>>", ":vert res +20<CR>", "Resize current pane to right");
