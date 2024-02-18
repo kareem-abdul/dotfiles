@@ -10,4 +10,6 @@ You may need to refer [remap](./lua/abdul/core/remap.lua) to check what those sh
 - javascript
 - jsx
 - html
+- css
+- tailwindcss
 

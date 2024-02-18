@@ -30,12 +30,15 @@ return {
         });
         require('mason-lspconfig').setup({
             ensure_installed = {
+                "tsserver",
+                "jdtls",    -- eclipse java lsp
+                "html",
+                "cssls",
+                "tailwindcss",
                 "dockerls",
                 "eslint",
                 "jsonls",
-                "tsserver",
                 "lua_ls",
-                "jdtls",    -- eclipse java lsp
                 "marksman", -- markdown lsp
                 "spectral", -- openapi lsp server
             },
