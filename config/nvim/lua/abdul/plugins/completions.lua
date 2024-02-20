@@ -36,8 +36,8 @@ return {
             },
             sources = cmp.config.sources({
                 -- { name = 'buffer' },
-                { name = 'treesitter' },
                 { name = 'nvim_lsp' },
+                { name = 'treesitter' },
                 { name = 'luasnip' },
 
                 { name = 'nvim_lua' },
