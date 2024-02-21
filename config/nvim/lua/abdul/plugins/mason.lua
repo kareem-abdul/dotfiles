@@ -1,7 +1,10 @@
 return {
     "williamboman/mason.nvim",
     dependencies = {
-        'williamboman/mason-lspconfig.nvim',
+        {
+            'williamboman/mason-lspconfig.nvim',
+            branch = "release-please--branches--main--components--mason-lspconfig.nvim"
+        },
         'WhoIsSethDaniel/mason-tool-installer.nvim'
     },
     config = function()
@@ -31,7 +34,7 @@ return {
         require('mason-lspconfig').setup({
             ensure_installed = {
                 "tsserver",
-                "jdtls",    -- eclipse java lsp
+                "jdtls", -- eclipse java lsp
                 "html",
                 "cssls",
                 "tailwindcss",
@@ -41,6 +44,7 @@ return {
                 "lua_ls",
                 "marksman", -- markdown lsp
                 "spectral", -- openapi lsp server
+                "solidity_ls"
             },
             automatic_installation = true,
         });
