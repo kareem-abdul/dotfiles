@@ -43,6 +43,7 @@ return {
             java = { 'lsp', 'treesitter' },
             javascript = { 'lsp', 'treesitter' },
             typescript = { 'lsp', 'treesitter' },
+            solidity = { 'indent', 'treesitter' },
             vim = { 'indent' },
             json = { 'treesitter' },
         }
