@@ -36,8 +36,7 @@ return {
         vim.o.foldlevelstart = 99
         vim.o.foldenable = true
 
-        vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-        vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+        require('abdul.core.remap').ufo_keymaos()
 
         local ftMap = {
             java = { 'lsp', 'treesitter' },
