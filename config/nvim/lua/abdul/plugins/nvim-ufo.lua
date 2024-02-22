@@ -64,7 +64,7 @@ return {
                     jumpBot = ']'
                 }
             },
-            close_fold_kinds = { 'imports', 'comment' },
+            close_fold_kinds = { 'imports' },
             provider_selector = function(bufnr, filetype, buftype)
                 return ftMap[filetype] or { 'treesitter', 'indent' }
             end,
