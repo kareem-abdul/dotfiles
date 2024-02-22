@@ -36,7 +36,7 @@ return {
         vim.o.foldlevelstart = 99
         vim.o.foldenable = true
 
-        require('abdul.core.remap').ufo_keymaos()
+        require('abdul.core.remap').ufo_keymaps()
 
         local ftMap = {
             java = { 'lsp', 'treesitter' },

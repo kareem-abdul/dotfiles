@@ -235,7 +235,7 @@ function M.eslint_lsp_keymaps(buffnr)
     keymap("n", "<leader>=", ":EslintFixAll<CR>", { buffer = buffnr, noremap = true, silent = true })
 end
 
-function M.ufo_keymaos()
+function M.ufo_keymaps()
     keymap('n', 'zR', require('ufo').openAllFolds, "[ufo] open all folds")
     keymap('n', 'zM', require('ufo').closeAllFolds, "[ufo] close all folds")
 end
