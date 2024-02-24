@@ -232,7 +232,10 @@ function M.git_worktree_keymaps()
 end
 
 function M.eslint_lsp_keymaps(buffnr)
-    keymap("n", "<leader>=", ":EslintFixAll<CR>", { buffer = buffnr, noremap = true, silent = true })
+    keymap({ "n", "v" }, "<leader>=", function ()
+        vim.lsp.buf.format({ async = true })
+        vim.cmd(":EslintFixAll<CR>")
+    end, "[lsp] format and eslint fix", { buffer = buffnr, noremap = true, silent = true })
 end
 
 function M.ufo_keymaps()
