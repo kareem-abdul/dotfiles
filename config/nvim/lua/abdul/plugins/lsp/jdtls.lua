@@ -95,8 +95,8 @@ function M.setup()
                              path = '/usr/lib/jvm/java-11-openjdk-amd64',
                          },
                          {
-                             name = "JavaSE-8",
-                             path = '/usr/lib/jvm/java-8-openjdk-amd64'
+                             name = "JavaSE-1.8",
+                             path = '/usr/lib/jvm/java-1.8.0-openjdk-amd64'
                          }
                      }
                 },
