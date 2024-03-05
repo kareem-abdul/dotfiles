@@ -74,15 +74,13 @@ function dports() {
     docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Networks}}\t{{.Ports}}"
 }
 
-# peco functions
-if (( $+commands[peco] )); then
+if (( $+commands[fzf] )); then
 
-        function dstart() {
-            # | peco --layout=bottom-up --rcfile=$ZSH_CUSTOM/plugins/zsh-aliases/peco.json \
+    function dstart() {
         local BUFFER=$(\
             docker ps -a --format "table {{.Names}}\t{{.State}}\t{{.ID}}" \
                 | tail -n +2 \
-                | fzf \
+                | fzf --layout=reverse --height=50\
                 | awk "{print \$3}" \
         );
         [ ! -z "$BUFFER" ] && docker start $(echo "$BUFFER")    
@@ -92,7 +90,7 @@ if (( $+commands[peco] )); then
         local BUFFER=$(\
             docker ps --format "table {{.Names}}\t{{.State}}\t{{.ID}}" \
                 | tail -n +2 \
-                | fzf \
+                | fzf --layout=reverse --height=50\
                 | awk "{print \$3}" \
         );
         [ ! -z "$BUFFER" ] && docker kill $(echo "$BUFFER")
@@ -102,7 +100,7 @@ if (( $+commands[peco] )); then
         local BUFFER=$(\
             docker ps --format "table {{.Names}}\t{{.State}}\t{{.ID}}" \
                 | tail -n +2 \
-                | fzf \
+                | fzf --layout=reverse --height=50\
                 | awk "{print \$3}" \
         );
 
@@ -113,7 +111,7 @@ if (( $+commands[peco] )); then
         local BUFFER=$(\
             docker ps --format "table {{.Names}}\t{{.State}}\t{{.ID}}" \
                 | tail -n +2 \
-                | fzf \
+                | fzf --layout=reverse --height=50\
                 | awk "{print \$3}" \
                 | head -n 1 \
         );
