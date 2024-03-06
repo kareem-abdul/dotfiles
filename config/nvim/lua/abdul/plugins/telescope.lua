@@ -46,7 +46,7 @@ return {
                     '--with-filename',
                     '--line-number',
                     '--column',
-                    '--smart-case',
+                    '--ignore-case',
                     '--hidden',
                 },
                 file_ignore_patterns = { "\\.git", "node_modules" },
