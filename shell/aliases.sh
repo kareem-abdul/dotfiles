@@ -80,7 +80,7 @@ if (( $+commands[fzf] )); then
         local BUFFER=$(\
             docker ps -a --format "table {{.Names}}\t{{.State}}\t{{.ID}}" \
                 | tail -n +2 \
-                | fzf --layout=reverse --height=50\
+                | fzf --layout=reverse --height=50 --border=rounded --border-label="Choose container"\
                 | awk "{print \$3}" \
         );
         [ ! -z "$BUFFER" ] && docker start $(echo "$BUFFER")    
@@ -90,7 +90,7 @@ if (( $+commands[fzf] )); then
         local BUFFER=$(\
             docker ps --format "table {{.Names}}\t{{.State}}\t{{.ID}}" \
                 | tail -n +2 \
-                | fzf --layout=reverse --height=50\
+                | fzf --layout=reverse --height=50 --border=rounded --border-label="Choose container"\
                 | awk "{print \$3}" \
         );
         [ ! -z "$BUFFER" ] && docker kill $(echo "$BUFFER")
@@ -100,7 +100,7 @@ if (( $+commands[fzf] )); then
         local BUFFER=$(\
             docker ps --format "table {{.Names}}\t{{.State}}\t{{.ID}}" \
                 | tail -n +2 \
-                | fzf --layout=reverse --height=50\
+                | fzf --layout=reverse --height=50 --border=rounded --border-label="Choose container"\
                 | awk "{print \$3}" \
         );
 
@@ -111,7 +111,7 @@ if (( $+commands[fzf] )); then
         local BUFFER=$(\
             docker ps --format "table {{.Names}}\t{{.State}}\t{{.ID}}" \
                 | tail -n +2 \
-                | fzf --layout=reverse --height=50\
+                | fzf --layout=reverse --height=50 --border=rounded --border-label="Choose container"\
                 | awk "{print \$3}" \
                 | head -n 1 \
         );
