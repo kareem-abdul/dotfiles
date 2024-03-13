@@ -1,13 +1,12 @@
 [alias]
     logg = log --graph --decorate --abbrev-commit --format=format:'%C(bold blue)%h%Creset - %C(bold green)%><(15,trunc)(%ar)%Creset %C(dim white)%><(10,mtrunc)[%an]%Creset - %C(white)%s%Creset %C(bold yellow)%d%Creset'
-    logf = "!git --no-pager logg --color=always | fzf --ansi | awk '{print $2}' | tee /dev/tty | wl-copy"
+    logf = "!git --no-pager log --oneline --color=always | fzf --ansi | awk '{print $1}' | tee /dev/tty | wl-copy"
     loggd = log --graph --decorate --abbrev-commit --format=format:'%>|(15)%C(bold blue)%h%Creset - %C(bold green)%><(15,trunc)(%as)%Creset %C(dim white)%><(10,mtrunc)[%an]%Creset - %C(white)%s%Creset %C(bold yellow)%d%Creset'
     pr = log --merges --decorate --format=format:'%C(bold blue)%h%Creset - %C(bold green)%><(15,trunc)(%as)%Creset %C(dim white)%><(10,trunc)[%an]%Creset - %C(bold white)%<(65,trunc)%b%Creset %C(dim green)%><(50,trunc)(%s)%Creset' 
     pb = "!git show-branch | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
     cb = "rev-parse --abbrev-ref HEAD"
     logb = "!git logg \"$(git pb)\"..\"$(git cb)\""
     co = checkout
-    ch = "!git reflog show --pretty=format:'%gs ~ %gd' --date=relative | grep 'checkout:' | grep -oE '[^ ]+ ~ .*' | awk -F~ '!seen[$1]++' | head -n 10 | awk -F' ~ HEAD@{' '{printf(\"  \\033[33m%14s: \\033[37m %s\\033[0m\\n\", substr($2, 1, length($2)-1), $1)}'"
 	br = branch
     ci = commit
     cim = commit -m
