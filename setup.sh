@@ -40,3 +40,13 @@ for path in $PWD/config/*; do
     fi
 done
 
+# shell
+for path in $PWD/shell/*; do
+    shell=$(basename $path)
+    if ! isInstalled "$shell"; then
+        read -p "Install $shell (y/n)" CHOISE
+        if [ "$CHOISE" -eq "y" ]; then
+            echo $shell >> installed
+        fi
+    fi
+done
