@@ -1,8 +1,41 @@
-#!/bin/bash
+#!/bin/env bash
 
+COMMAND="./mvnw"
 if [[ ! -f "./mvnw" ]]; then
-    echo "You need maven to run this script";
-    exit 1;
+    if ! command -v mvn &> /dev/null; then
+        echo "You need either maven installed in your system or maven wrapper in current folder to run this script";
+        exit 1;
+    fi
+    COMMAND="mvn"
+fi
+echo "using $COMMAND"
+
+GROUP_ID="com.example"
+read -p "Enter group id (default: $GROUP_ID): " ANSWER
+if [[ "$ANSWER" != "" ]]; then
+    GROUP_ID=$(echo $ANSWER | awk '{print tolower($0)}')
 fi
 
-./mvnw archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
+ARTIFACT_ID=$(echo $GROUP_ID | sed -E 's/^.*\.(.*)$/\1/g')
+read -p "Enter artifact id (default: $ARTIFACT_ID): " ANSWER
+if [[ "$ANSWER" != "" ]]; then
+    ARTIFACT_ID=$(echo $ANSWER | awk '{print tolower($0)}')
+fi
+
+VERSION="0.0"
+read -p "Enter version (default: $VERSION)" ANSWER
+if [[ "$ANSWER" != "" ]]; then
+    VERSION="$ANSWER"
+fi
+
+$COMMAND archetype:generate \
+    -DinteractiveMode=false \
+    -DarchetypeGroupId=org.apache.maven.archetypes \
+    -DarchetypeArtifactId=maven-archetype-quickstart \
+    -DarchetypeVersion=1.4 \
+    -DgroupId="$GROUP_ID" \
+    -DartifactId="$ARTIFACT_ID" \
+    -Dversion="$VERSION"
+cd $ARTIFACT_ID
+$COMMAND wrapper:wrapper
+
