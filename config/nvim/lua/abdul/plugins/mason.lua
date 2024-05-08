@@ -28,6 +28,10 @@ return {
                 "java-test",
                 "java-debug-adapter",
                 "ts-node",
+
+                "ruff_lsp",
+                -- "isort",
+                -- "debugpy"
             },
             run_on_start = true
         });
