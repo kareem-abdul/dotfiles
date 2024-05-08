@@ -33,15 +33,16 @@ return {
         });
         require('mason-lspconfig').setup({
             ensure_installed = {
-                "tsserver",
+                "tsserver", -- javascript, typescript lsp
+                "pyright", -- python lsp
                 "jdtls", -- eclipse java lsp
+                "lua_ls", -- lua lsp
                 "html",
                 "cssls",
                 "tailwindcss",
                 "dockerls",
                 "eslint",
                 "jsonls",
-                "lua_ls",
                 "marksman", -- markdown lsp
                 "spectral", -- openapi lsp server
                 "solidity_ls"
