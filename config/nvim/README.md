@@ -5,6 +5,7 @@ You may need to refer [remap](./lua/abdul/core/remap.lua) to check what those sh
 
 ## Supports
 - java
+- python
 - typescript
 - tsx
 - javascript

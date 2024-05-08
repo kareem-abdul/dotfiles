@@ -30,8 +30,7 @@ return {
                 "ts-node",
 
                 "ruff_lsp",
-                -- "isort",
-                -- "debugpy"
+                "debugpy"
             },
             run_on_start = true
         });
