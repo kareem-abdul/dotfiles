@@ -1,5 +1,38 @@
 local dap = require('dap')
 
+local function python_path()
+    local cwd = vim.fn.getcwd()
+    local path = cwd;
+    if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
+        path = cwd .. '/venv/bin/python'
+    elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
+        path =  cwd .. '/.venv/bin/python'
+    else
+        path =  vim.fn.stdpath('data') .. '/mason/packages/debugpy/venv/bin/python'
+    end
+    print("using " .. path);
+    return path
+end
+
+local function find_manage_py()
+    local path_table = vim.fs.find(
+        { "manage.py" },
+        {
+            path = vim.fn.getcwd(),
+            upward = false,
+            limit = 1,
+        }
+    );
+    print(vim.inspect(path_table))
+    local next = next;
+
+    if path_table == nil or next(path_table) == nil then
+        error("manage.py not found");
+    end
+    print(vim.inspect(path_table))
+    return next(path_table);
+end
+
 dap.adapters.python = function(cb, config)
     if config.request == 'attach' then
         ---@diagnostic disable-next-line: undefined-field
@@ -28,27 +61,33 @@ dap.adapters.python = function(cb, config)
 end
 
 dap.configurations.python = {
-  {
-    -- The first three options are required by nvim-dap
-    type = 'python'; -- the type here established the link to the adapter definition: `dap.adapters.python`
-    request = 'launch';
-    name = "Launch file";
+    {
+        type = 'python',
+        request = 'launch',
+        name = "Python: Launch file",
 
-    -- Options below are for debugpy, see https://github.com/microsoft/debugpy/wiki/Debug-configuration-settings for supported options
+        program = "${file}",
+        console = "integratedTerminal",
+        python = python_path,
+    },
+    {
+        type = 'python',
+        request = 'launch',
+        name = 'Python: Launch Django',
 
-    program = "${file}"; -- This configuration will launch the current file if used.
-    pythonPath = function()
-      -- debugpy supports launching an application with a different interpreter then the one used to launch debugpy itself.
-      -- The code below looks for a `venv` or `.venv` folder in the current directly and uses the python within.
-      -- You could adapt this - to for example use the `VIRTUAL_ENV` environment variable.
-      local cwd = vim.fn.getcwd()
-      if vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
-        return cwd .. '/venv/bin/python'
-      elseif vim.fn.executable(cwd .. '/.venv/bin/python') == 1 then
-        return cwd .. '/.venv/bin/python'
-      else
-        return vim.fn.stdpath('data') .. '/mason/packages/debugpy/venv/bin/python'
-      end
-    end;
-  },
+        program = find_manage_py(),
+        args = { 'runserver', '--noreload'},
+        django = true,
+        console = "integratedTerminal",
+        python = python_path,
+    },
+    {
+        type = 'python',
+        request = 'attach',
+        name = "Python: Attach",
+        console = "integratedTerminal",
+        processId = require 'dap.utils'.pick_process,
+        cwd = "${workspaceFolder}",
+        python = python_path,
+    },
 }
