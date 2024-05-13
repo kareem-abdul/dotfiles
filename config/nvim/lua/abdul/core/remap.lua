@@ -148,7 +148,7 @@ function M.lsp_config_keymaps(client, bufnr)
     keymap("n", "<leader>rs", ":LspRestart<CR>", "restart lsp", opts)
 end
 
-function M.dap_keymaps()
+function M.dap_keymaps(layouts)
     -- debugger keymaps
     local dap = require("dap");
     local dap_widgets = require("dap.ui.widgets");
@@ -172,7 +172,8 @@ function M.dap_keymaps()
     keymap("n", '<leader>d?', function() dap_widgets.centered_float(dap_widgets.scopes) end, "[dap] centered float")
     keymap("n", '<leader>dK', require('dapui').eval, '[dap] eval expression')
     keymap("v", '<leader>dK', require('dapui').eval, '[dap] eval selected expression')
-    keymap("n", '<leader>du', require("dapui").toggle, "[dap] toggle dap ui")
+    keymap("n", '<leader>du', function() require("dapui").toggle({ layout = layouts.console }) end, "[dap] toggle dap ui")
+    keymap("n", '<leader>dw', function() require("dapui").toggle({ layout = layouts.watcher }) end, "[dap] toggle dap ui")
     keymap("n", '<leader>tdc', '<cmd>Telescope dap configurations<CR>', "[dap] view dap configurations")
     keymap("n", '<leader>tdl', '<cmd>Telescope dap list_breakpoints<cr>', "[dap] list breakpoints")
     keymap("n", '<leader>tdf', '<cmd>Telescope dap frames<cr>', "[dap] dap frames")

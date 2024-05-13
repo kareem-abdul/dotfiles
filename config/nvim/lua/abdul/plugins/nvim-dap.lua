@@ -1,23 +1,29 @@
-local dap_ui_layout = {
-    -- {
-    --     elements = {
-    --         { id = "watches",     size = 0.25 },
-    --         { id = "breakpoints", size = 0.25 },
-    --         { id = "scopes",      size = 0.25 },
-    --         { id = "stacks",      size = 0.25 },
-    --     },
-    --     position = "left",
-    --     size = 40
-    -- },
-    {
-        elements = {
-            { id = "console", size = 1 },
-            -- { id = "repl", size = 0.5 }
-        },
-        position = "bottom",
-        size = 10
-    }
-};
+local CONSOLE_ONLY = 1
+local WATCHER_ONLY = 2
+
+---@type dapui.Config.layout[]
+local dap_ui_layout = {};
+
+dap_ui_layout[CONSOLE_ONLY] = {
+    elements = {
+        { id = "console", size = 1 }
+        -- { id = "repl", size = 0.5 }
+    },
+    position = "bottom",
+    size = 10,
+}
+
+dap_ui_layout[WATCHER_ONLY] = {
+    elements = {
+        { id = "watches", size = 1 },
+        -- { id = "breakpoints", size = 0.25 },
+        -- { id = "scopes",      size = 0.25 },
+        -- { id = "stacks",      size = 0.25 },
+    },
+    position = "bottom",
+    size = 10,
+}
+
 
 return {
     "mfussenegger/nvim-dap",
@@ -25,8 +31,9 @@ return {
         "rcarriga/nvim-dap-ui",
     },
     config = function()
-        require("abdul.core.remap").dap_keymaps()
+        require("abdul.core.remap").dap_keymaps({ console = CONSOLE_ONLY, watcher = WATCHER_ONLY })
         local dap, dapui = require("dap"), require("dapui")
+
         dapui.setup({
             layouts = dap_ui_layout,
             controls = {
@@ -36,7 +43,7 @@ return {
         })
 
         dap.listeners.after.event_initialized["dapui_config"] = function()
-            dapui.open()
+            dapui.toggle({ layout = CONSOLE_ONLY })
         end
         -- dap.listeners.before.event_terminated["dapui_config"] = function()
         --     dapui.close()
