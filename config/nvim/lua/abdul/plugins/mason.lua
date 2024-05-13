@@ -1,10 +1,7 @@
 return {
     "williamboman/mason.nvim",
     dependencies = {
-        {
-            'williamboman/mason-lspconfig.nvim',
-            branch = "release-please--branches--main--components--mason-lspconfig.nvim"
-        },
+        'williamboman/mason-lspconfig.nvim',
         'WhoIsSethDaniel/mason-tool-installer.nvim'
     },
     config = function()
