@@ -23,13 +23,6 @@ local function find_manage_py()
             limit = 1,
         }
     );
-    print(vim.inspect(path_table))
-    local next = next;
-
-    if path_table == nil or next(path_table) == nil then
-        error("manage.py not found");
-    end
-    print(vim.inspect(path_table))
     return next(path_table);
 end
 
