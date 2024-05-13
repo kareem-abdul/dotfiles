@@ -30,6 +30,8 @@ dap.configurations.typescript = {
             "${workspaceFolder}/**",
             "!**/node_modules/**",
         },
+        console = "integratedTerminal",
+
     },
 
 }

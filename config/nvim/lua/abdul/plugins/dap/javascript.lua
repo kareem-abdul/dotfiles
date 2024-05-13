@@ -20,6 +20,7 @@ dap.configurations.javascript = {
         name = "Launch file",
         program = "${file}",
         cwd = "${workspaceFolder}",
+        console = "integratedTerminal",
     },
     {
         type = "pwa-node",
@@ -27,6 +28,7 @@ dap.configurations.javascript = {
         name = "Attach",
         processId = require 'dap.utils'.pick_process,
         cwd = "${workspaceFolder}",
+        console = "integratedTerminal",
     },
 }
 
