@@ -34,6 +34,11 @@ return {
         require("abdul.core.remap").dap_keymaps({ console = CONSOLE_ONLY, watcher = WATCHER_ONLY })
         local dap, dapui = require("dap"), require("dapui")
 
+        vim.api.nvim_create_user_command("DapLoadLaunchJSON", function ()
+            require('dap.ext.vscode').load_launchjs('.dap/launch.json')
+            require('dap.ext.vscode').load_launchjs('.vscode/launch.json')
+        end, { nargs = 0})
+
         dapui.setup({
             layouts = dap_ui_layout,
             controls = {
