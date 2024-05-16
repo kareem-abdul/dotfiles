@@ -76,6 +76,24 @@ dap.configurations.python = {
     },
     {
         type = 'python',
+        request = 'launch',
+        name = 'FastAPI module',
+        module = 'uvicorn',
+        args = function()
+            local co = coroutine.running();
+
+            vim.ui.input({ prompt = 'FastAPI app module > ', default = 'main:app', completion = 'file' }, function (input)
+                coroutine.resume(co, input or 'main:app')
+            end);
+
+            local input = coroutine.yield();
+            return { input, '--use-colors' }
+        end,
+        console = 'integratedTerminal',
+        python = python_path,
+    },
+    {
+        type = 'python',
         request = 'attach',
         name = "Python: Attach",
         console = "integratedTerminal",
