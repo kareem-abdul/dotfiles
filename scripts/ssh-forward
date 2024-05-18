@@ -1,0 +1,37 @@
+#!/bin/bash
+
+
+# Forwards appplications that uses wayland through ssh similar to x11 forwarding
+# read more at https://gitlab.freedesktop.org/mstoeckl/waypipe
+# requires waypipe to be installed in both server and client 
+#
+# usage: ssh-forward user@server application
+
+
+if ! which waypipe &> /dev/null; then
+    echo "waypipe is not installed in your system. check https://gitlab.freedesktop.org/mstoeckl/waypipe/-/tree/master?ref_type=heads"
+    exit 1
+fi
+
+id=$(uuidgen)
+ssh_server=$1
+shift
+application=$@
+
+waypipe -s /tmp/waypipe-client-$id.sock client &
+
+script="$(cat <<EOF
+    if ! which waypipe &> /dev/null; then
+        echo "waypipe does not exists on the remote server. check https://gitlab.freedesktop.org/mstoeckl/waypipe/-/tree/master?ref_type=heads"
+        exit 1
+    fi
+    waypipe -c lz4 --unlink-socket -s /tmp/waypipe-server-$id.sock --display wayland-$id server -- $application 
+    echo "deleting server files"
+    rm -rf /tmp/waypipe-server-$id.sock
+EOF
+)"
+
+ssh -R /tmp/waypipe-server-$id.sock:/tmp/waypipe-client-$id.sock -t $ssh_server "$script"
+kill %1
+echo "deleting client files"
+rm -rf /tmp/waypipe-client-$id.sock
