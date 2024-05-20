@@ -10,6 +10,7 @@ return {
                     debug = false,
                     fd_binary_name = "find",
                     enable_default_searches = false, -- requires fd command to be installed https://github.com/sharkdp/fd
+                    notify_user_on_venv_activation = false,
                 },
                 search = {
                     my_venv = {
