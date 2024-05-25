@@ -1,6 +1,8 @@
 -- a file explorer in a buffer
 return {
     'stevearc/oil.nvim',
+    lazy = true,
+    cmd = "Oil",
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
