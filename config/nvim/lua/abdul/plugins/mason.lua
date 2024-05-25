@@ -25,6 +25,7 @@ return {
                 "java-test",
                 "java-debug-adapter",
                 "ts-node",
+                "js-debug-adapter",
 
                 "ruff_lsp",
                 "debugpy"
