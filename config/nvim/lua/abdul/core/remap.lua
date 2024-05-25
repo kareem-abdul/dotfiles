@@ -210,26 +210,26 @@ function M.gitsigns_keymaps(bufnr)
 
     -- Actions
     keymap('n', '<leader>hs', gs.stage_hunk, "[git] stage hunk", opts)
-    keymap('n', '<leader>hu', gs.undo_stage_hunk, "undo stage hunk", opts)
-    keymap('n', '<leader>hr', gs.reset_hunk, "reset hunk", opts)
-    keymap('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end, "stage visual select", opts)
-    keymap('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end, "reset visula select", opts)
-    keymap('n', '<leader>hS', gs.stage_buffer, "stage buffer", opts)
-    keymap('n', '<leader>hR', gs.reset_buffer, "reset buffer", opts)
-    keymap('n', '<leader>hp', gs.preview_hunk, "preview hunk", opts)
-    keymap('n', '<leader>hb', function() gs.blame_line { full = true } end, "blame line", opts)
-    keymap('n', '<leader>hd', gs.diffthis, "diff this", opts)
-    keymap('n', '<leader>hD', function() gs.diffthis('~') end, "diff this ~", opts)
+    keymap('n', '<leader>hu', gs.undo_stage_hunk, "[git] undo stage hunk", opts)
+    keymap('n', '<leader>hr', gs.reset_hunk, "[git] reset hunk", opts)
+    keymap('v', '<leader>hs', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end, "[git] stage visual select", opts)
+    keymap('v', '<leader>hr', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end, "[git] reset visula select", opts)
+    keymap('n', '<leader>hS', gs.stage_buffer, "[git] stage buffer", opts)
+    keymap('n', '<leader>hR', gs.reset_buffer, "[git] reset buffer", opts)
+    keymap('n', '<leader>hp', gs.preview_hunk, "[git] preview hunk", opts)
+    keymap('n', '<leader>hb', function() gs.blame_line { full = true } end, "[git] blame line", opts)
+    keymap('n', '<leader>hd', gs.diffthis, "[git] diff this", opts)
+    keymap('n', '<leader>hD', function() gs.diffthis('~') end, "[git] diff this ~", opts)
     -- keymap('n', '<leader>td', gs.toggle_deleted, opts)
 
     -- Text object
-    keymap({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', "select hunk", opts)
+    keymap({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', "[git] select hunk", opts)
 end
 
 function M.git_worktree_keymaps()
     local telescope = require("telescope")
-    keymap("n", "<leader>gw", telescope.extensions.git_worktree.git_worktrees)
-    keymap("n", "<leader>gwc", telescope.extensions.git_worktree.create_git_worktree)
+    keymap("n", "<leader>gws", telescope.extensions.git_worktree.git_worktrees, "[git] switch worktree")
+    keymap("n", "<leader>gwc", telescope.extensions.git_worktree.create_git_worktree, "[git] create worktree")
 end
 
 function M.eslint_lsp_keymaps(buffnr)
