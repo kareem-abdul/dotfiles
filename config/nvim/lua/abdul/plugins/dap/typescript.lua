@@ -13,7 +13,7 @@ if not dap.adapters["pwa-node"] then
     }
 end
 
-local ts_loader = vim.fn.stdpath('data') .. '/mason/packages/ts-node/esm.mjs'
+local ts_loader = vim.fn.stdpath('data') .. '/mason/packages/ts-node/node_modules/ts-node/esm.mjs'
 dap.configurations.typescript = {
     {
         type = "pwa-node",
