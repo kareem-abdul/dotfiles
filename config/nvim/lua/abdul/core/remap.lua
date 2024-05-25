@@ -220,6 +220,7 @@ function M.gitsigns_keymaps(bufnr)
     keymap('n', '<leader>hb', function() gs.blame_line { full = true } end, "[git] blame line", opts)
     keymap('n', '<leader>hd', gs.diffthis, "[git] diff this", opts)
     keymap('n', '<leader>hD', function() gs.diffthis('~') end, "[git] diff this ~", opts)
+    keymap('n', '<leader>hB', "<cmd> Git blame<CR>", "[git] show git blame", opts)
     -- keymap('n', '<leader>td', gs.toggle_deleted, opts)
 
     -- Text object
