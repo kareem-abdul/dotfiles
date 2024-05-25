@@ -1,8 +1,10 @@
 return {
     "danymat/neogen",
     dependencies = "nvim-treesitter/nvim-treesitter",
+    lazy = true,
+    keys = "<leader>nf",
     config = function()
-        require("neogen").setup({ snippet_engine = "luasnip" })
-        vim.keymap.set("n", "<leader>nf", require("neogen").generate)
+        require("neogen").setup({ snippet_engine = "luasnip" });
+        require "abdul.core.remap".neogen_keymaps();
     end,
 }

@@ -244,6 +244,10 @@ function M.ufo_keymaps()
     keymap('n', 'zM', require('ufo').closeAllFolds, "[ufo] close all folds")
 end
 
+function M.neogen_keymaps()
+    keymap("n", "<leader>nf", require("neogen").generate, "[noegen] generate docs")
+end
+
 
 return M;
 
