@@ -3,7 +3,7 @@ local dap = require('dap')
 local function python_path()
     local cwd = vim.fn.getcwd()
     local path = cwd;
-    local venv_path = vim.fb.getenv("VIRTUAL_ENV")
+    local venv_path = vim.fn.getenv("VIRTUAL_ENV")
     -- check if VENV is set
     if  venv_path ~= nil and venv_path ~= "" then
         path = venv_path .. 'python'
