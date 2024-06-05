@@ -6,7 +6,7 @@ local function python_path()
     local venv_path = vim.fn.getenv("VIRTUAL_ENV")
     -- check if VENV is set
     if  venv_path ~= nil and venv_path ~= "" then
-        path = venv_path .. 'python'
+        path = venv_path .. '/python'
     -- else check common places for venv
     elseif vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
         path = cwd .. '/venv/bin/python'
