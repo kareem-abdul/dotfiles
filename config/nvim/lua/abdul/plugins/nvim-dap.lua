@@ -48,7 +48,7 @@ return {
         })
 
         dap.listeners.after.event_initialized["dapui_config"] = function()
-            dapui.toggle({ layout = CONSOLE_ONLY })
+            dapui.open({ layout = CONSOLE_ONLY })
         end
         -- dap.listeners.before.event_terminated["dapui_config"] = function()
         --     dapui.close()
