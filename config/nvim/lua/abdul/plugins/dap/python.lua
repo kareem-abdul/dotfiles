@@ -3,9 +3,9 @@ local dap = require('dap')
 local function python_path()
     local cwd = vim.fn.getcwd()
     local path = cwd;
-    local venv_path = vim.fn.getenv("VIRTUAL_ENV")
+    local venv_path = os.getenv("VIRTUAL_ENV") or ""
     -- check if VENV is set
-    if  venv_path ~= nil and venv_path ~= "" then
+    if  venv_path ~= "" then
         path = venv_path .. '/bin/python'
     -- else check common places for venv
     elseif vim.fn.executable(cwd .. '/venv/bin/python') == 1 then
