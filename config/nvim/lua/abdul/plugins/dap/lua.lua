@@ -1,7 +1,11 @@
 local dap = require("dap")
 
 dap.adapters.nlua = function(callback, config)
-    callback({ type = 'server', host = config.host or "127.0.0.1", port = config.port or 8086 })
+    ---@diagnostic disable-next-line: undefined-field
+    local host = config.host or "127.0.0.1"
+    ---@diagnostic disable-next-line: undefined-field
+    local port = config.port or 8086
+    callback({ type = 'server', host = host, port = port })
 end
 
 dap.configurations.lua = {
