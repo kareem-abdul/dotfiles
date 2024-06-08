@@ -2,11 +2,10 @@ local M = {}
 
 local lspconfig = require('lspconfig')
 
-function M.setup(capabilities, on_attach)
+function M.setup(capabilities)
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     lspconfig.html.setup({
         capabilities = capabilities,
-        on_attach = on_attach,
         filetypes = { "html" },
         init_options = {
             configurationSection = { "html", "css", "javascript" },

@@ -2,12 +2,11 @@ local M = {}
 
 local lspconfig = require('lspconfig')
 
-function M.setup(capabilities, on_attach)
+function M.setup(capabilities)
     local default_config = require('lspconfig.server_configurations.tailwindcss').default_config;
     lspconfig.tailwindcss.setup(
         vim.tbl_deep_extend('force', default_config, {
             capabilities = capabilities,
-            on_attach = on_attach,
             filetypes = {
                 "django-html",
                 "htmldjango",

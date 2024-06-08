@@ -19,7 +19,6 @@ return {
 
         setup_signs();
 
-        local on_attach = function(client, bufnr) remap.lsp_config_keymaps(client, bufnr) end;
         local capabilities = vim.tbl_deep_extend(
             "force",
             {},
@@ -38,12 +37,11 @@ return {
                 end
                 local server_setup = utils.load("abdul.plugins.lsp." .. server_name);
                 if server_setup then
-                    server_setup.setup(capabilities, on_attach);
+                    server_setup.setup(capabilities);
                     return;
                 end
                 lspconfig[server_name].setup({
                     capabilities = capabilities,
-                    on_attach = on_attach,
                 });
             end,
         })
