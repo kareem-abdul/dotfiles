@@ -20,8 +20,16 @@ opt.colorcolumn = "150"
 opt.signcolumn = "yes"
 
 opt.scrolloff = 8
-opt.updatetime = 50
+opt.updatetime = 250
 opt.wrap = false
+
+opt.list = true
+opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+opt.inccommand = 'split'
+
+opt.cursorline = true
+opt.cursorlineopt = "line"
 
 -- netrw options
 vim.g.netrw_banner = 0
