@@ -47,8 +47,8 @@ function M.load_global()
     -- keymap("i", "{<CR>", "{<CR>}<ESC>O");
 
     -- resize panes
-    keymap("n", "<C-w>>", ":vert res +20<CR>", "Resize current pane to right");
-    keymap("n", "<C-w><", ":vert res -20<CR>", "Resize current pane to left");
+    keymap("n", "<C-w>.", ":vert res +20<CR>", "Resize current pane to right");
+    keymap("n", "<C-w>,", ":vert res -20<CR>", "Resize current pane to left");
 
     vim.api.nvim_create_autocmd('FileType', {
         pattern = 'qf',
