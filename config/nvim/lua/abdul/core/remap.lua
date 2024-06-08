@@ -37,6 +37,14 @@ function M.load_global()
     keymap("v", "<leader>y", "\"+y", "Copy selection to system clipboard")
     keymap("n", "<leader>Y", "\"+Y", "Copy line to system clipboard")
 
+    -- diagnostic keymaps
+    keymap("n", "<leader>ef", vim.diagnostic.open_float, "[diag] open diagnostic float")
+    keymap("n", "[d", vim.diagnostic.goto_next, "[diag] go to next diagnostic")
+    keymap("n", "]d", vim.diagnostic.goto_prev, "[diag] go to prev diagnostic")
+    keymap("n", "<leader>et", function() require("telescope.builtin").diagnostics({ buffnr = 0}) end,"[telescope][diag] view buffer diagnostics")
+    keymap('n', '<leader>eq', vim.diagnostic.setloclist, '[diag] Open buffer diagnostic [Q]uickfix list')
+    keymap('n', '<leader>eQ', vim.diagnostic.setqflist, '[diag] Open [all] diagnostic [Q]uickfix list')
+
     -- removed due to ../plugins/autopairs.lua
     -- auto close paranthesis, braces, brackets, quotes etc.
     -- keymap("i", '"', '""<left>');
@@ -137,10 +145,6 @@ function M.lsp_config_keymaps(client, bufnr)
     end
     keymap("i", "<C-h>", vim.lsp.buf.signature_help, "[lsp] show signature", opts)
 
-    keymap("n", "<leader>vgd", vim.diagnostic.open_float, "[diag] open diagnostic float", opts)
-    keymap("n", "[d", vim.diagnostic.goto_next, "[diag] go to next diagnostic", opts)
-    keymap("n", "]d", vim.diagnostic.goto_prev, "[diag] go to prev diagnostic", opts)
-
     -- vim.lsp.inlay_hint(bufnr, true);
 
     keymap("n", "gd", builtin.lsp_definitions, "[telescope][lsp] view definitions", opts)
@@ -148,7 +152,6 @@ function M.lsp_config_keymaps(client, bufnr)
     keymap("n", "gi", builtin.lsp_implementations, "[telescope][lsp] view implementations", opts)
     keymap("n", "gt", builtin.lsp_type_definitions, "[telescope][lsp] view type definitions", opts)
     keymap('n', 'gs', builtin.lsp_document_symbols, "[telescope][lsp] View document symbols")
-    keymap("n", "gD", function() builtin.diagnostics({ bufnr = bufnr }) end,"[telescope][diag] view buffer diagnostics", opts)
 
     keymap("n", "<leader>rs", ":LspRestart<CR>", "restart lsp", opts)
 end
