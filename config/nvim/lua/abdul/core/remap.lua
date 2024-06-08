@@ -129,7 +129,12 @@ function M.lsp_config_keymaps(client, bufnr)
     keymap("n", "<leader>=", function() vim.lsp.buf.format({ async = true }) end, "[lsp] format current buffer", opts)
     keymap("v", "<leader>=", function() vim.lsp.buf.format({ async = true }) end, "[lsp] format current buffer", opts)
     keymap("n", "K", vim.lsp.buf.hover, "[lsp] show doc / hover", opts)
-    keymap("n", "<C-h>", function() vim.lsp.inlay_hint(bufnr, nil) end, "[lsp] enable buffer inlay hint", opts)
+    -- keymap("n", "<C-h>", function() vim.lsp.inlay_hint(bufnr, nil) end, "[lsp] enable buffer inlay hint", opts)
+    if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+        keymap("n", "<C-h>", function()
+            vim.lsp.inlay_hint.enable(bufnr, not vim.lsp.inlay_hint.is_enabled)
+        end, "[lsp] enable buffer inlay hint", opts)
+    end
     keymap("i", "<C-h>", vim.lsp.buf.signature_help, "[lsp] show signature", opts)
 
     keymap("n", "<leader>vgd", vim.diagnostic.open_float, "[diag] open diagnostic float", opts)
