@@ -49,7 +49,7 @@ return {
     'neovim/nvim-lspconfig',
     dependencies = {
         'hrsh7th/cmp-nvim-lsp',
-        { 'j-hui/fidget.nvim', opts = {} },
+        { 'j-hui/fidget.nvim', opts = { integration = { ["nvim-tree"] = { enable = false } } } },
     },
     event = { "BufReadPre", "BufNewFile" },
     config = function()
