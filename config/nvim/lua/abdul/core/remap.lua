@@ -129,8 +129,8 @@ function M.lsp_config_keymaps(client, bufnr)
     local builtin = require("telescope.builtin");
     local opts = { buffer = bufnr, noremap = true, silent = false };
 
-    keymap("n", "<leader>gd", vim.lsp.buf.definition, "[lsp] goto definition", opts)
-    keymap("n", "<leader>gr", vim.lsp.buf.references, "[lsp] goto references", opts)
+    keymap("n", "<leader>vgd", vim.lsp.buf.definition, "[lsp] goto definition", opts)
+    keymap("n", "<leader>vgr", vim.lsp.buf.references, "[lsp] goto references", opts)
     keymap("n", "<leader>vrn", vim.lsp.buf.rename, "[lsp] rename symbol", opts)
     keymap("n", "<leader>vws", vim.lsp.buf.workspace_symbol, "[lsp] list all workspace symbols in qf", opts)
     keymap("n", "<leader>ca", vim.lsp.buf.code_action, "[lsp] code action", opts)
@@ -147,11 +147,11 @@ function M.lsp_config_keymaps(client, bufnr)
 
     -- vim.lsp.inlay_hint(bufnr, true);
 
-    keymap("n", "gd", builtin.lsp_definitions, "[telescope][lsp] view definitions", opts)
-    keymap("n", "gr", builtin.lsp_references, "[telescope][lsp] view references", opts)
-    keymap("n", "gi", builtin.lsp_implementations, "[telescope][lsp] view implementations", opts)
-    keymap("n", "gt", builtin.lsp_type_definitions, "[telescope][lsp] view type definitions", opts)
-    keymap('n', 'gs', builtin.lsp_document_symbols, "[telescope][lsp] View document symbols")
+    keymap("n", "<leader>gd", builtin.lsp_definitions, "[telescope][lsp] view definitions", opts)
+    keymap("n", "<leader>gr", builtin.lsp_references, "[telescope][lsp] view references", opts)
+    keymap("n", "<leader>gi", builtin.lsp_implementations, "[telescope][lsp] view implementations", opts)
+    keymap("n", "<leader>gt", builtin.lsp_type_definitions, "[telescope][lsp] view type definitions", opts)
+    keymap('n', '<leader>gs', builtin.lsp_document_symbols, "[telescope][lsp] View document symbols")
 
     keymap("n", "<leader>rs", ":LspRestart<CR>", "restart lsp", opts)
 end
