@@ -71,6 +71,20 @@ dap.configurations.python = {
     {
         type = 'python',
         request = 'launch',
+        name = 'Python: Launch module',
+        module = function ()
+            local co = coroutine.running();
+            vim.ui.input({ prompt = 'module > ', completion = 'file' }, function (input)
+                coroutine.resume(co, input)
+            end);
+           return coroutine.yield();
+        end,
+        console = "integratedTerminal",
+        python = python_path
+    },
+    {
+        type = 'python',
+        request = 'launch',
         name = 'Python: Launch Django',
 
         program = find_manage_py(),
