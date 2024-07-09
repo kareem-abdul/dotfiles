@@ -237,7 +237,7 @@ end
 
 function M.git_worktree_keymaps()
     local telescope = require("telescope")
-    keymap("n", "<leader>gws", telescope.extensions.git_worktree.git_worktrees, "[git] switch worktree")
+    keymap("n", "<leader>gws", telescope.extensions.git_worktree.git_worktree, "[git] switch worktree")
     keymap("n", "<leader>gwc", telescope.extensions.git_worktree.create_git_worktree, "[git] create worktree")
 end
 

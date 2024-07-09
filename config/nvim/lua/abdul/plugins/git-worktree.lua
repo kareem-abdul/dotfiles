@@ -1,5 +1,7 @@
 return {
     "polarmutex/git-worktree.nvim",
+    branch="v2",
+    dependencies = { "nvim-lua/plenary.nvim" },
     enable = function()
         return vim.fs.find(".git", { upward = true, path = vim.fn.getcwd() })[1] ~= nil
     end,
