@@ -15,7 +15,7 @@ return {
                 },
                 search = {
                     my_venv = {
-                        command = "$FD " .. vim.fn.getcwd() .. " -name python"
+                        command = "$FD -L " .. vim.fn.getcwd() .. " -name python"
                     }
                 },
             }
