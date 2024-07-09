@@ -28,6 +28,7 @@ end
 -- adds code folding
 return {
     "kevinhwang91/nvim-ufo",
+    tag = 'v1.4.0',
     dependencies = { 'kevinhwang91/promise-async' },
     lazy = true,
     config = function()
@@ -45,9 +46,12 @@ return {
             solidity = { 'indent', 'treesitter' },
             vim = { 'indent' },
             json = { 'treesitter' },
+            default = { 'treesitter', 'indent' }
         }
-
         require('ufo').setup({
+            close_fold_kinds_for_ft = {
+                default = { 'imports', 'comment' },
+            },
             open_fold_hl_timeout = 150,
             enable_get_fold_virt_text = false,
             preview = {
@@ -63,9 +67,8 @@ return {
                     jumpBot = ']'
                 }
             },
-            close_fold_kinds = { 'imports' },
-            provider_selector = function(bufnr, filetype, buftype)
-                return ftMap[filetype] or { 'treesitter', 'indent' }
+            provider_selector = function(_, filetype, _)
+                return ftMap[filetype] or ftMap.default
             end,
             fold_virt_text_handler = handler
         })
