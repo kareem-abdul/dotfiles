@@ -3,6 +3,7 @@ return {
     "linux-cultist/venv-selector.nvim",
     lazy = true,
     branch = "regexp", -- This is the regexp branch, use this for the new version
+    ft = "python",
     config = function()
         require("venv-selector").setup({
             settings = {
