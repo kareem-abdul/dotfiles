@@ -13,21 +13,20 @@ opt.backup = false
 
 opt.hlsearch = true
 opt.incsearch = true
+opt.inccommand = 'split'
 
 opt.termguicolors = true
 opt.background = "dark"
-opt.colorcolumn = "150"
+opt.colorcolumn = "80"
 opt.signcolumn = "yes"
 
 opt.scrolloff = 8
-opt.updatetime = 250
+opt.updatetime = 50
 opt.timeoutlen = 300
 opt.wrap = false
 
 opt.list = true
 opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
-
-opt.inccommand = 'split'
 
 opt.cursorline = true
 opt.cursorlineopt = "line"
