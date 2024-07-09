@@ -1,6 +1,6 @@
 return {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.3',
+    tag = '0.1.8',
     dependencies = {
         'nvim-lua/plenary.nvim',
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
@@ -51,7 +51,7 @@ return {
                 },
                 file_ignore_patterns = { "\\.git", "node_modules" },
                 mappings = require("abdul.core.remap").telescope_keymaps(),
-                path_display =  filenameFirst,
+                path_display = filenameFirst,
                 sorting_strategy = "ascending",
                 layout_config = {
                     horizontal = {
@@ -61,7 +61,7 @@ return {
                     }
                 },
                 preview = {
-                    filetype_hook = function(filepath, bufnr, opts)
+                    filetype_hook = function(filepath, bufnr, _)
                         if vim.startswith(filepath, "jdt://") then
                             vim.api.nvim_buf_call(bufnr, function() require("jdtls").open_classfile(filepath) end)
                             return true
@@ -72,10 +72,10 @@ return {
             },
             extensions = {
                 fzf = {
-                    fuzzy = true,     -- false will only do exact matching
+                    fuzzy = true,                   -- false will only do exact matching
                     override_generic_sorter = true, -- override the generic sorter
-                    override_file_sorter = true, -- override the file sorter
-                    case_mode = "ignore_case", -- or "ignore_case" or "respect_case"
+                    override_file_sorter = true,    -- override the file sorter
+                    case_mode = "ignore_case",      -- or "ignore_case" or "respect_case"
                     -- the default case_mode is "smart_case"
                 }
             }
