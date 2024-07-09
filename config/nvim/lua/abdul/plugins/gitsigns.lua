@@ -1,19 +1,19 @@
 return {
     "lewis6991/gitsigns.nvim",
     dependencies = {
-        "tpope/vim-fugitive",
+        { "tpope/vim-fugitive", lazy = false },
     },
     event = { "BufReadPre", "BufNewFile" },
     config = function()
         require("gitsigns").setup({
-            -- signs = {
-            --     add = { text = '│' },
-            --     change = { text = '│' },
-            --     delete = { text = '_' },
-            --     topdelete = { text = '‾' },
-            --     changedelete = { text = '~' },
-            --     untracked = { text = '┆' },
-            -- },
+            signs = {
+                add          = { text = '┃' },
+                change       = { text = '┃' },
+                delete       = { text = '_' },
+                topdelete    = { text = '‾' },
+                changedelete = { text = '~' },
+                untracked    = { text = '┆' },
+            },
             signcolumn = true,
             numhl = false,
             linehl = false,
@@ -33,7 +33,7 @@ return {
             update_debounce = 100,
             max_file_length = 40000, -- Disable if file is longer than this (in lines)
             preview_config = {
-                border = 'single',
+                border = 'rounded',
                 style = 'minimal',
                 relative = 'cursor',
                 row = 0,
