@@ -20,8 +20,12 @@ done
 shift $((OPTIND - 1))
 
 if [[ $delete -eq 0 ]]; then
-    tmux popup -E "tmux list-sessions -F '#S' | fzf | xargs -I {} tmux switch-client -t {}"
+    tmux list-sessions -F '#S' \
+        | fzf --scheme=path --height=50 --reverse --border=rounded --border-label="Choose session"\
+        | xargs -I {} tmux switch-client -t {}
     exit 0
 fi
 
-tmux popup -E "tmux list-sessions -F '#S' | fzf -m | xargs -I {} tmux kill-session -t {}"
+tmux list-sessions -F '#S' \
+    | fzf -m --scheme=path --height=50 --reverse --border=rounded --border-label="Choose sessions to delete"\
+    | xargs -I {} tmux kill-session -t {}

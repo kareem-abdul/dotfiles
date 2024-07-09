@@ -17,7 +17,7 @@ else
 		fi
 		find $path -mindepth 2 -maxdepth 2 -type d;
 	done
-    } | sort -u | fzf)
+    } | sort -u | fzf --scheme=path --height=50 --reverse --border=rounded --border-label="Choose project")
 fi
 
 if [[ -z $selected ]]; then
