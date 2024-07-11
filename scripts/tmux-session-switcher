@@ -21,11 +21,22 @@ shift $((OPTIND - 1))
 
 if [[ $delete -eq 0 ]]; then
     tmux list-sessions -F '#S' \
-        | fzf --scheme=path --height=50 --reverse --border=rounded --border-label="Choose session"\
+        | fzf --scheme=path \
+            --reverse \
+            --border=rounded \
+            --border-label="Choose session" \
+            --preview='tmux-session-tree {}' \
+            --preview-window='70%,border-left' \
         | xargs -I {} tmux switch-client -t {}
     exit 0
 fi
 
 tmux list-sessions -F '#S' \
-    | fzf -m --scheme=path --height=50 --reverse --border=rounded --border-label="Choose sessions to delete"\
+    | fzf -m \
+        --scheme=path \
+        --reverse \
+        --border=rounded \
+        --border-label="Choose sessions to delete" \
+        --preview='tmux-session-tree {}' \
+        --preview-window='70%,border-left' \
     | xargs -I {} tmux kill-session -t {}
