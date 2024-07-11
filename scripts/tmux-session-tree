@@ -11,7 +11,7 @@ tmux ls -F'#{session_id}' | while read -r session; do
     session_name=$(echo "$session_info" | cut -d ':' -f 1)
 
     if [[ -n $1 ]] &&  [[ "$1" == "$session_name" ]]; then
-        print_color "$BOLD$BLUE$session_info"
+        print_color " $BOLD$BLUE$session_info"
     else
         print_color "$BOLD$BLACK$session_info"
     fi
@@ -25,9 +25,9 @@ tmux ls -F'#{session_id}' | while read -r session; do
             )
             window_info=${window_info##"$window_id-"}
             if [[ "$session_name" == "$1" ]]; then
-                print_color "    $WHITE$BOLD$window_info"
+                print_color "    $WHITE$BOLD  $window_info"
             else
-                print_color "    $IBLACK$ITALIC$window_info"
+                print_color "   $IBLACK$ITALIC  $window_info"
             fi
         done
 done
