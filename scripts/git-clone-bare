@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -e
+
+# This script clones a bare repo with remote options enabled
+#
+#  Example usage:
+#   $ git-clone-bare git@github.com:name/repo.git
+#     => clones to repo.git folder
+#   $ git-clone-bare git@github.com:name/repo.git my-repo
+#     => clones to my-repo folder
+
+url=$1
+reponame=${url##*/}
+name=${2:-reponame}
+
+git clone --bare $url $name
+cd $name
+
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+git fetch origin
