@@ -16,8 +16,8 @@
     pl = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
     a = add
     aa = add .
-    ch = "!git-recent-checkout.sh"
-    recentb = "!git-recent-branches.sh"
+    ch = "!git-recent-checkout"
+    recentb = "!git-recent-branches"
 [pager]
 	branch = false
 [pull]
