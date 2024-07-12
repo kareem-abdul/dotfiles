@@ -12,7 +12,7 @@ set -e
 
 url=$1
 reponame=${url##*/}
-name=${2:-reponame}
+name=${2:-$reponame}
 
 git clone --bare $url $name
 cd $name
