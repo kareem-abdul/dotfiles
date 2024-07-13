@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source "$(dirname "$0")/date-functions.sh"
-source "$(dirname "$0")/colors.sh"
+source "$(dirname "$0")/lib/date-functions.sh"
+source "$(dirname "$0")/lib/colors.sh"
 
 #######################################
 # Lists tmux session sorted by access time
@@ -9,7 +9,7 @@ source "$(dirname "$0")/colors.sh"
 #   format: The format of the output. Refer FORMATS section in tmux MAN. 
 #           By default this is session name
 #######################################
-funciton _tmux_list_session_sorted() {
+function _tmux_list_session_sorted() {
     local format=${1:-"#{session_name}"}
 
     tmux ls -F "#{session_activity} $format" | sort -r | sed 's|^[^ ]* ||'

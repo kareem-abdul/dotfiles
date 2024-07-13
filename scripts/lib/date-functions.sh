@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "$0")/util-functions.sh"
+source "$(dirname "$0")/lib/util-functions.sh"
 
 #######################################
 # prints time relative to current time
