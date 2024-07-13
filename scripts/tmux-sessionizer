@@ -2,21 +2,21 @@
 
 declare -a PATHS
 if [[ -z "$PROJECT_PATHS" ]]; then
-	PATHS=("$HOME/Documents/projects" "$HOME/workspace/projects")
+    PATHS=("$HOME/Documents/projects" "$HOME/workspace/projects")
 else
-	PATHS=( $PROJECT_PATHS )
+    PATHS=( $PROJECT_PATHS )
 fi
 
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
     selected=$({
-	for path in "${PATHS[@]}"; do
-		if [[ ! -d $path ]]; then
-			continue
-		fi
-		find $path -mindepth 2 -maxdepth 2 -type d;
-	done
+    for path in "${PATHS[@]}"; do
+        if [[ ! -d $path ]]; then
+            continue
+        fi
+        find $path -mindepth 2 -maxdepth 2 -type d;
+    done
     } | sort -u | fzf --scheme=path --height=50 --reverse --border=rounded --border-label="Choose project")
 fi
 
