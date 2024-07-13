@@ -1,9 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # selected=$(tmux list-sessions -F '#S'| fzf)
 # tmux switch-client -t $selected
 #
 
+source "$(dirname "$0")/lib/tmux-functions.sh"
 
 err() { echo "$@" >&2; exit 1; }
 
@@ -20,23 +21,25 @@ done
 shift $((OPTIND - 1))
 
 if [[ $delete -eq 0 ]]; then
-    tmux list-sessions -F '#S' \
+    _tmux_list_session_with_last_accessed \
         | fzf --scheme=path \
+            --ansi \
             --reverse \
             --border=rounded \
             --border-label="Choose session" \
-            --preview='tmux-session-tree {}' \
+            --preview="echo {} | awk '{print \$1}' | tmux-session-tree" \
             --preview-window='70%,border-left' \
-        | xargs -I {} tmux switch-client -t {}
+        | awk '{print $1}' | xargs -I {} tmux switch-client -t {}
     exit 0
 fi
 
-tmux list-sessions -F '#S' \
+_tmux_list_session_with_last_accessed \
     | fzf -m \
+        --ansi \
         --scheme=path \
         --reverse \
         --border=rounded \
         --border-label="Choose sessions to delete" \
-        --preview='tmux-session-tree {}' \
+        --preview="echo {} | awk '{print \$1}' | tmux-session-tree" \
         --preview-window='70%,border-left' \
-    | xargs -I {} tmux kill-session -t {}
+    | awk '{print $1}' | xargs -I {} tmux kill-session -t {}
