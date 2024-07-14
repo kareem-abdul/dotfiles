@@ -11,9 +11,9 @@ return {
                     insert_only = true,
                     start_in_insert = true,
                     border = "rounded",
-                    relative = "editor",
+                    relative = "win",
                     win_options = {
-                        winblend = 10,
+                        winhighlight = 'NormalFloat:DiagnosticError',
                         wrap = false,
                         list = true,
                         listchars = "precedes:…,extends:…",
@@ -36,7 +36,7 @@ return {
                 },
                 select = {
                     enabled = true,
-                    backend = { "telescope", "fzf_lua", "fzf", "builtin", "nui" },
+                    backend = { "telescope" },
                     trim_prompt = true,
                     telescope = require 'telescope.themes'.get_dropdown({
                         layout_config = {
