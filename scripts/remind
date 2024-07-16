@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+function notify() {
+    paplay /usr/share/sounds/Oxygen-Im-Phone-Ring.ogg &
+    notify-send -t 1000 -u critical "$1" &
+}
+
+at=$(date -d "$1" +%s)
+start=$(date +%s)
+offset=${3:-60}
+
+echo "reminder $2 set at $(date -d "$1")"
+if [[ $at -lt $start ]]; then
+    notify $2
+fi
+
+# TODO: use system timers or cron for timer instead of while loop
+while true; do
+    time=$(date +%s)
+    if [[ $time -gt $at ]]; then
+        notify "$2"
+        exit 0
+    fi
+    sleep $offset
+done
