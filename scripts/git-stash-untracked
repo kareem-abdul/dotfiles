@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+
+#######################################
+# Stashes only untracked files
+#######################################
 function untracked() {
     git stash $@
     git stash -u
