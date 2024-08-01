@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+function untracked() {
+    git stash $@
+    git stash -u
+    git stash pop stash@{1}
+}
+
+untracked $@
