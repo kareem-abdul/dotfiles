@@ -18,6 +18,7 @@
     aa = add .
     ch = "!git-recent-checkout"
     recentb = "!git-recent-branches"
+    stashu = "!git-stash-untracked"
 [pager]
 	branch = false
 [pull]
