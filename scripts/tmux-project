@@ -64,6 +64,7 @@ fi
 if [[ ! -z "$PROJ_NAME" ]]; then
     mkdir "$PROJ_NAME"
     cd "$PROJ_NAME"
-    git init --initial-branch=main
+    git init --initial-branch=main --bare
+    git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
     tmux-sessionizer "$selected/$PROJ_NAME"
 fi
