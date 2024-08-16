@@ -61,6 +61,8 @@ return {
                     }
                 },
                 preview = {
+                    filesize_limit = 0.1,
+                    treesitter = false,
                     filetype_hook = function(filepath, bufnr, _)
                         if vim.startswith(filepath, "jdt://") then
                             vim.api.nvim_buf_call(bufnr, function() require("jdtls").open_classfile(filepath) end)
