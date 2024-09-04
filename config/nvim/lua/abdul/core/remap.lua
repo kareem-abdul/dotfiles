@@ -258,5 +258,9 @@ function M.neogen_keymaps()
 end
 
 
+function M.curl_keymaps()
+end
+
+
 return M;
 
