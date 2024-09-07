@@ -62,7 +62,20 @@ return {
                 lualine_c = {},
                 lualine_x = {},
             },
-            extensions = { 'oil' }
+            inactive_winbar = {
+                lualine_c = {
+                    { 'FugitiveHead', color = { fg = colors.violet, gui = 'italic' } },
+                    {
+                        'filename',
+                        cond = conditions.buffer_not_empty,
+                        file_status = true,
+                        path = 1,
+                        shorting_target = 200,
+                        color = { fg = colors.magenta, gui = 'italic' },
+                    }
+                }
+            },
+            extensions = { 'oil', 'fugitive' }
         }
 
         local function ins_left(component)
