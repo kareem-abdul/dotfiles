@@ -5,7 +5,6 @@ return {
         'nvim-lua/plenary.nvim',
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
         'nvim-telescope/telescope-dap.nvim',
-        'kareem-abdul/harpoon',
         'nvim-tree/nvim-web-devicons',
         'polarmutex/git-worktree.nvim',
     },
@@ -83,7 +82,6 @@ return {
             }
         })
         telescope.load_extension('fzf')
-        telescope.load_extension('harpoon')
         telescope.load_extension('dap')
         telescope.load_extension("git_worktree")
     end
