@@ -69,23 +69,22 @@ function M.load_global()
 end
 
 function M.harpoon_keymaps()
-    local mark = require("harpoon.mark")
-    local ui = require("harpoon.ui")
-    local cmd = require("harpoon.cmd-ui");
-    keymap("n", "<leader>a", mark.add_file)
-    keymap("n", "<C-e>", ui.toggle_quick_menu)
-    keymap("n", "<leader>cm", cmd.toggle_quick_menu)
-    keymap("n", "<C-n>", ui.nav_next)
-    keymap("n", "<C-p>", ui.nav_prev)
-    keymap("n", "<leader>1", function() ui.nav_file(1) end);
-    keymap("n", "<leader>2", function() ui.nav_file(2) end);
-    keymap("n", "<leader>3", function() ui.nav_file(3) end);
-    keymap("n", "<leader>4", function() ui.nav_file(4) end);
-    keymap("n", "<leader>5", function() ui.nav_file(5) end);
-    keymap("n", "<leader>6", function() ui.nav_file(6) end);
-    keymap("n", "<leader>7", function() ui.nav_file(7) end);
-    keymap("n", "<leader>8", function() ui.nav_file(8) end);
-    keymap("n", "<leader>9", function() ui.nav_file(9) end);
+    local harpoon = require('harpoon')
+    local ui = harpoon.ui
+
+    keymap("n", "<leader>a", function() harpoon:list():add() end, "[harpoon] add file")
+    keymap("n", "<leader>ce", function() ui:toggle_quick_menu(harpoon:list()) end, "[harpoon] toggle file list")
+    keymap("n", "<C-n>", function() harpoon:list():next() end, "[harpoon] add file")
+    keymap("n", "<C-p>", function() harpoon:list():prev() end, "[harpoon] add file")
+    keymap("n", "<leader>1", function() harpoon:list():select(1) end);
+    keymap("n", "<leader>2", function() harpoon:list():select(2) end);
+    keymap("n", "<leader>3", function() harpoon:list():select(3) end);
+    keymap("n", "<leader>4", function() harpoon:list():select(4) end);
+    keymap("n", "<leader>5", function() harpoon:list():select(5) end);
+    keymap("n", "<leader>6", function() harpoon:list():select(6) end);
+    keymap("n", "<leader>7", function() harpoon:list():select(7) end);
+    keymap("n", "<leader>8", function() harpoon:list():select(8) end);
+    keymap("n", "<leader>9", function() harpoon:list():select(9) end);
 end
 
 function M.telescope_keymaps()
