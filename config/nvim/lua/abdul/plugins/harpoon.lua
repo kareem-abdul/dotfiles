@@ -21,7 +21,9 @@ return {
         vim.api.nvim_create_autocmd({ 'BufLeave', 'ExitPre' }, {
             pattern = '__harpoon-menu__*',
             group = harpoon_group,
-            callback = require("harpoon").ui:save,
+            callback = function ()
+                require("harpoon").ui:save()
+            end,
         })
 
         -- set cursor line
