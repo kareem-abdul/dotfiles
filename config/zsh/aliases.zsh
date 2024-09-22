@@ -1,16 +1,24 @@
 alias ls="ls --color"
-alias l="ls --color -la"
-alias ll="ls --color -l"
+alias la='ls --color -A'
+alias l='ls --color -alFtr'
+alias lsd='ls --color -d .*'
+alias ll='ls --color -alF'
+
+alias h='history | tail'
 
 alias zshconf="vim ~/.zshrc"
-alias tmuxconf="vim ~/.tmux.conf"
+alias tmuxconf="vim ~/.config/tmux/tmux.conf"
 alias sshconf="vim ~/.ssh/config" 
-alias gitconf="vim ~/.gitconfig"
+alias gitconf="vim ~/.config/git/config"
 
-alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
+if command -v apt &>/dev/null; then
+    alias update='sudo apt update && sudo apt upgrade && sudo apt autoremove'
+elif command -v pacman &> /dev/null; then
+    alias update='sudo pacman -Syu'
+fi
 alias topmem='ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head'
 alias topcpu='ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%cpu | head'
-alias backup="sudo rsync -aAXv --progress --delete --exclude={'/proc/*','/boot/*','/dev/*','/home/kareem/.cache/*','/home/kareem/.local/share/Trash/*','/media/*','/mnt/*','/sys/*','/swapfile'} -e 'ssh -i \"$HOME/.ssh/dtomics_id_rsa\"' / root@dtomics:/mnt/hdd/backup"
+# alias backup="sudo rsync -aAXv --progress --delete --exclude={'/proc/*','/boot/*','/dev/*','/home/kareem/.cache/*','/home/kareem/.local/share/Trash/*','/media/*','/mnt/*','/sys/*','/swapfile'} -e 'ssh -i \"$HOME/.ssh/dtomics_id_rsa\"' / root@dtomics:/mnt/hdd/backup"
 
 alias start='sudo systemctl start'
 alias stop='sudo systemctl stop'
