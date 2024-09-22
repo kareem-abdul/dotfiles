@@ -1,4 +1,6 @@
-#!/bin/bash
+alias ls="ls --color"
+alias l="ls --color -la"
+alias ll="ls --color -l"
 
 alias zshconf="vim ~/.zshrc"
 alias tmuxconf="vim ~/.tmux.conf"
