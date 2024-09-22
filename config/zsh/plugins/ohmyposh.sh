@@ -10,4 +10,4 @@ if [ ! -d "$OMP_HOME" ]; then
     rm $OMP_HOME/themes.zip
 fi
 
-eval "$($OMP_HOME/bin/oh-my-posh init zsh)"
+eval "$($OMP_HOME/bin/oh-my-posh init zsh --config ${XDG_CONFIG_HOME}/ohmyposh/zen.toml)"
