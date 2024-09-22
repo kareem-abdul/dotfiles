@@ -22,6 +22,10 @@ zinit light Aloxaf/fzf-tab
 zinit snippet OMZP::git
 zinit snippet OMZP::command-not-found
 
+# source shell scripts
+for path in ${ZSH_HOME}/plugins/*;  do
+    source $path
+done
 
 autoload -U compinit;
 compinit
