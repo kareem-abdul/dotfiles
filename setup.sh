@@ -39,3 +39,16 @@ for path in $PWD/config/*; do
         echo "$config" >> installed
     fi
 done
+
+# zsh
+if ! isInstalled "zshrc"; then
+    echo "setting up zshrc"
+    dest="$HOME/.zshrc"
+    if [[ -f "$dest" ]]; then
+        echo "Existing zshrc found. Backing it up to $HOME/.dotfiles.bak"
+        mv $dest ~/.dotfiles.bak/.zshrc.$(date "+%H:%M:%S:%N").bak
+    fi
+    ln -s $PWD/.zshrc $dest
+    echo "zshrc" >> installed
+fi
+
