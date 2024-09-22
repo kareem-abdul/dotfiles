@@ -1,4 +1,4 @@
-export ZSH_HOME="${XDG_CONFIG_HOME}/zsh"
+export ZSH_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}/zsh"
 source $ZSH_HOME/environments.zsh
 
 # load zinit plugin manager
