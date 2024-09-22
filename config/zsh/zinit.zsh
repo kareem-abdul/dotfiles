@@ -23,8 +23,8 @@ zinit snippet OMZP::git
 zinit snippet OMZP::command-not-found
 
 # source shell scripts
-for path in ${ZSH_HOME}/plugins/*;  do
-    source $path
+for plugin in ${ZSH_HOME}/plugins/*;  do
+    source "$plugin"
 done
 
 autoload -U compinit;
