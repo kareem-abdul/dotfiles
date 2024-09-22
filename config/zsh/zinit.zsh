@@ -27,6 +27,10 @@ autoload -U compinit;
 compinit
 zinit cdreplay -q
 
+source $ZSH_HOME/keymaps.zsh
+source $ZSH_HOME/options.zsh
+source $ZSH_HOME/aliases.zsh
+
 # completion styling
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
