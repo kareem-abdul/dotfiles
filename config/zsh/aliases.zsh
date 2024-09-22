@@ -6,6 +6,8 @@ alias ll='ls --color -alF'
 
 alias h='history | tail'
 
+alias {hostname2ip,h2ip}='dig +short'
+
 alias zshconf="vim ~/.zshrc"
 alias tmuxconf="vim ~/.config/tmux/tmux.conf"
 alias sshconf="vim ~/.ssh/config" 
