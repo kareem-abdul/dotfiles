@@ -14,4 +14,8 @@ setopt hist_save_no_dups
 setopt hist_find_no_dups
 setopt hist_reduce_blanks
 
-
+# completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
