@@ -1,8 +1,7 @@
-alias ls="ls --color"
-alias la='ls --color -A'
-alias l='ls --color -alFtr'
-alias lsd='ls --color -d .*'
-alias ll='ls --color -alF'
+alias ls='ls --color --group-directories-first'
+alias la='ls --color -A --group-directories-first'
+alias l='ls --color -al --group-directories-first'
+alias ll='ls --color -al'
 
 alias h='history | tail'
 
