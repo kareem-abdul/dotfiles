@@ -1,4 +1,4 @@
-if ! command -v docker 2>/dev/null; then
+if ! command -v docker &>/dev/null; then
     alias docker="podman"
 fi
 
