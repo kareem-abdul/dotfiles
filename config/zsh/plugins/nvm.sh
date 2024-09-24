@@ -4,4 +4,10 @@ if [[ ! -d "$NVM_DIR" ]]; then
     git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
 fi
 
-[ -s "$NVM_DIR/nvm.sh" ] && source $NVM_DIR/nvm.sh --no-use
+function nvm() {
+    echo "NVM not loaded!. Loading now.."
+
+    unset -f nvm
+    [ -s "$NVM_DIR/nvm.sh" ] && source $NVM_DIR/nvm.sh
+    nvm "$@"
+}
