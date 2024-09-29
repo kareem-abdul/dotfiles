@@ -28,6 +28,7 @@ dap_ui_layout[WATCHER_ONLY] = {
 return {
     "mfussenegger/nvim-dap",
     dependencies = {
+        "nvim-neotest/nvim-nio",
         "rcarriga/nvim-dap-ui",
     },
     config = function()
