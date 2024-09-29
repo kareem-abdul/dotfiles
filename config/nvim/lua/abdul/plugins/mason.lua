@@ -21,7 +21,6 @@ return {
 
         require('mason-tool-installer').setup({
             ensure_installed = {
-                "yq",
                 "java-test",
                 "java-debug-adapter",
                 "ts-node",
