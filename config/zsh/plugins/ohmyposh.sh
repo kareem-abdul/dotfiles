@@ -1,4 +1,4 @@
-OMP_HOME="${XDG_DATA_HOME}/.local/share}/ohmyposh"
+OMP_HOME="${XDG_DATA_HOME}/ohmyposh"
 
 if [ ! -d "$OMP_HOME" ]; then
     mkdir -p $OMP_HOME/{bin,themes}
