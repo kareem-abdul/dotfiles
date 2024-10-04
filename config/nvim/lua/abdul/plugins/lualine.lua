@@ -138,15 +138,15 @@ return {
             },
             inactive_winbar = {
                 lualine_c = {
-                    { 'FugitiveHead', color = { fg = colors.violet, gui = 'italic' } },
-                    {
-                        'filename',
-                        cond = utils.buffer_not_empty,
-                        file_status = true,
-                        path = 1,
-                        shorting_target = 200,
-                        color = { fg = colors.magenta, gui = 'italic' },
-                    }
+                    -- { 'FugitiveHead', color = { fg = colors.violet, gui = 'italic' } },
+                    -- {
+                    --     'filename',
+                    --     cond = utils.buffer_not_empty,
+                    --     file_status = true,
+                    --     path = 1,
+                    --     shorting_target = 200,
+                    --     color = { fg = colors.magenta, gui = 'italic' },
+                    -- }
                 }
             },
             extensions = { 'oil', 'fugitive' }
