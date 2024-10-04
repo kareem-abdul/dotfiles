@@ -6,13 +6,14 @@ function M.setup(capabilities)
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     lspconfig.html.setup({
         capabilities = capabilities,
-        filetypes = { "html" },
+        filetypes = { "html", 'templ', 'handlebars', 'hbs' },
         init_options = {
             configurationSection = { "html", "css", "javascript" },
             embeddedLanguages = {
                 css = true,
                 javascript = true
-            }
+            },
+            provideFormatter = true,
         }
 
     })
