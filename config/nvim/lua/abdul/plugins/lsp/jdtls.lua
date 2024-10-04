@@ -116,6 +116,11 @@ function M.setup()
                         url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml"
                     }
                 },
+                jdt = {
+                    ls = {
+                        androidSupport = { enabled = true }
+                    }
+                },
                 implementationsCodeLens = { enabled =  true },
                 referenceCodeLens = { enabled = true },
                 references = {
