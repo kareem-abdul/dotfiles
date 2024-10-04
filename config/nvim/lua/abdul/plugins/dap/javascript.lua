@@ -24,7 +24,25 @@ dap.configurations.javascript = {
     },
     {
         type = "pwa-node",
+        request = "launch",
+        name = "Launch file with node args",
+        program="${file}",
+        cwd="${workspaceFolder}",
+        console="integratedTerminal",
+        runtimeArgs = function ()
+            local co = coroutine.running()
+            vim.ui.input({ prompt = "node args"}, function (input)
+                coroutine.resume(co, input or "")
+            end)
+
+            local input = coroutine.yield();
+            return { input }
+        end
+    },
+    {
+        type = "pwa-node",
         request = "attach",
+        port = 9229,
         name = "Attach",
         processId = require 'dap.utils'.pick_process,
         cwd = "${workspaceFolder}",
