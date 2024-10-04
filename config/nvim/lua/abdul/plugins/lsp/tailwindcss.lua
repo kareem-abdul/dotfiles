@@ -12,6 +12,8 @@ function M.setup(capabilities)
                 "htmldjango",
                 "ejs",
                 'erb',
+                'handlebars',
+                'hbs',
                 'eruby', -- vim ft
                 "gohtml",
                 "gohtmltmpl",
