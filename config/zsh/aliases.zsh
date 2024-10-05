@@ -130,6 +130,19 @@ if (( $+commands[fzf] )); then
     }
 fi
 
+function start_tmux() {
+    if which tmux &> /dev/null; then
+        if [[ -z "$TMUX" && -z "$TERMINAL_CONTEXT" ]]; then
+            if tmux run &>/dev/null; then
+                tmux -2u attach
+            else
+                tmux -2u new
+            fi
+        fi
+    fi
+}
+
+
 # transfer.sh  functions
 # transfer() { gpg --no-symkey-cache -o- -ac "$1" | curl -H "Max-Downloads: 1" -T - https://transfer.sh/$(basename "$1") | tee /dev/null }
 # dowload() { curl "$1" | gpg --no-symkey-cache -d -o $(basename "$1") }
