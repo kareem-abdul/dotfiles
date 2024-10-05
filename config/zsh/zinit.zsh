@@ -2,10 +2,14 @@ export ZSH_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}/zsh"
 source $ZSH_HOME/environments.zsh
 
 # load zinit plugin manager
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+ZINIT_HOME="${ZINIT_HOME:-${XDG_DATA_HOME}/.local/share/zinit/zinit.git}"
 if [ ! -d "$ZINIT_HOME" ]; then
     mkdir -p "$(dirname $ZINIT_HOME)"
     git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+ZINIT_PROGRAMS_BIN="${ZINIT_PROGRAMS_BIN:-${BIN_PATH}/zinit}"
+if [ ! -d "$ZINIT_PROGRAMS_BIN" ];
+    mkdir -p "$ZINIT_PROGRAMS_BIN"
 fi
 
 source "${ZINIT_HOME}/zinit.zsh"

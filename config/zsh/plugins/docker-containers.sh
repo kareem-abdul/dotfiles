@@ -1,5 +1,5 @@
 if ! command -v dc_start &>/dev/null; then
-    zi ice as"program" cp"dc_start -> $BIN_PATH"
+    zi ice as"program" cp"dc_start -> $ZINIT_PROGRAMS_BIN"
     zi light kareem-abdul/docker-containers
 fi
 
