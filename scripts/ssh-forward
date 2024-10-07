@@ -31,7 +31,7 @@ script="$(cat <<EOF
 EOF
 )"
 
-ssh -R /tmp/waypipe-server-$id.sock:/tmp/waypipe-client-$id.sock -t $ssh_server "$script"
+ssh -R /tmp/waypipe-server-$id.sock:/tmp/waypipe-client-$id.sock -t $ssh_server "bash -lc '$script'"
 kill %1
 echo "deleting client files"
 rm -rf /tmp/waypipe-client-$id.sock
