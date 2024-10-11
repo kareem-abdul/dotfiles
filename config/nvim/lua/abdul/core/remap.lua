@@ -73,7 +73,7 @@ function M.harpoon_keymaps()
     local ui = harpoon.ui
 
     keymap("n", "<leader>a", function() harpoon:list():add() end, "[harpoon] add file")
-    keymap("n", "<leader>ce", function() ui:toggle_quick_menu(harpoon:list()) end, "[harpoon] toggle file list")
+    keymap("n", "<C-e>", function() ui:toggle_quick_menu(harpoon:list()) end, "[harpoon] toggle file list")
     keymap("n", "<C-n>", function() harpoon:list():next() end, "[harpoon] add file")
     keymap("n", "<C-p>", function() harpoon:list():prev() end, "[harpoon] add file")
     keymap("n", "<leader>1", function() harpoon:list():select(1) end);
