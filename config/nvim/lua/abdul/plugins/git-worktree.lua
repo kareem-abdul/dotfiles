@@ -15,6 +15,8 @@ return {
             confirm_telescope_deletions = true,
             autopush = false,
         }
+        local Hooks = require("git-worktree.hooks")
+        Hooks.register(Hooks.type.SWITCH, Hooks.builtins.update_current_buffer_on_switch)
         require('abdul.core.remap').git_worktree_keymaps()
     end
 }
