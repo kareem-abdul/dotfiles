@@ -52,7 +52,7 @@ return {
         }
         require('ufo').setup({
             close_fold_kinds_for_ft = {
-                default = { 'imports', 'comment' },
+                -- default = { 'imports', 'comment' },
             },
             open_fold_hl_timeout = 150,
             enable_get_fold_virt_text = false,
