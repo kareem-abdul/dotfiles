@@ -10,7 +10,7 @@ return {
         vim.g.git_worktree = {
             change_directory_command = 'cd',
             update_on_change = true,
-            update_on_change_command = 'e .',
+            update_on_change_command = 'Oil .',
             clearjumps_on_change = true,
             confirm_telescope_deletions = true,
             autopush = false,
