@@ -26,7 +26,6 @@ alias stop='sudo systemctl stop'
 alias status='sudo systemctl status'
 alias restart='sudo systemctl restart'
 
-alias mvn='"$(pwd)/mvnw"'
 alias notify='notify-send -t 1000 -u critical "Complete" && paplay /usr/share/sounds/freedesktop/stereo/complete.oga'
 
 if [ "$XDG_SESSION_TYPE" = "x11" ]
