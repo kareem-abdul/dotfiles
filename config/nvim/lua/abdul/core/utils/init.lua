@@ -60,4 +60,38 @@ function M.buffer_not_empty()
     return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
 end
 
+function M.split_string(inputstr, sep)
+    if sep == nil then
+        sep = "%s"
+    end
+    local t = {}
+    for str in string.gmatch(inputstr, "([^" .. sep .. "]+)") do
+        table.insert(t, str)
+    end
+    return t
+end
+
+function M.load_env_file(file)
+    local fd = io.open(file, 'r')
+    if fd == nil then
+        return {}
+    end
+
+    ---@type string
+    local content = fd:read('*a')
+    local envs = {}
+    local _ = content:gsub('(.-)\r?\n', function(line)
+        if not (line == nil or line == '') and string.sub(line, 1, 1) ~= '#' then
+            local index = string.find(line, "=")
+            local key = string.sub(line, 1, index - 1)
+            local raw_value = string.sub(line, index + 1)
+            local value = raw_value and vim.trim(raw_value) or ''
+            vim.fn.setenv(key, value)
+            envs[key] = value
+        end
+    end)
+    fd:close()
+    return envs
+end
+
 return M;
