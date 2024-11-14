@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+
+git fsck --lost-found 2>&1 \
+    | grep "dangling commit" \
+    | awk '{print $3}' \
+    | xargs -I {} sh -c 'git show --oneline --shortstat --color=always {} | head -n 1'
