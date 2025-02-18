@@ -53,6 +53,7 @@ alias aws='docker run --rm  -v ~/.aws/:/root/.aws -v $(pwd):/aws amazon/aws-cli'
 alias youtube-dl='docker run -it --rm -v $(pwd):/dl -w /dl -u "$(id -u ${USER}):$(id -g ${USER})" youtube-dl youtube-dl --no-cache-dir'  
 alias kafka='docker exec -it kafka-broker bash'
 # alias nvim='docker run -it --rm -u nvim --name nvim-$(date "+%s") -v $(pwd):/home/nvim/app -w /home/nvim/app nvim nvim'
+alias sunvim='SUDO_EDITOR=nvim sudo -e'
 
 
 # if [ ! -d "$HOME/.venv/pre-commit" ]; then
